@@ -1,1 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+body {
+  font-family: 'Open Sans';
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  height: 10%;
+  background: #ffffff;
+}
+
+.header-image-navButton {
+  width: 10%;
+}
+
+h1 {
+  font-size: 2em;
+  weight: 800;
+  margin-right: 40%;
+}
+
+.body-section-displayScreen {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center
+}
+
+.enterPage-section-playerInputs {
+  display: flex;
+  justify-content: flex-end;
+  width: 60%;
+}
+
+.enterPage-button-playGameButton {
+  background-color: #010101;
+  width: 60%;
+  color: #ffffff;
+  text-align: center;
+  margin: 10%, 0, 10%, 0;
+}
+
+.displayScreen-header {
+  color: #010101;
+  font-size: 2em;
+  weight: 800;
+}
+
+.displayScreen-text {
+  color: #010101;
+  font-size: 1em;
+  weight: 400;
+}
+
+.body-section-gameBoard {
+  display: grid;
+  grid-column: 1fr 4fr 1fr;
+  background-color: #F5F7F6;
+}
+
+.gameBoard-section-scoreColumn {
+  background-color: #010101;
+  margin: 1em;
+}
+
+.gameBoard-scoreColumn-heavyText {
+  color: #ffffff;
+  font-weight: 800;
+  margin: 1em 1em 0 1em;
+}
+
+.gameBoard-scoreColumn-lightText {
+  color: #ffffff;
+  font-weight: 400;
+  margin: 1em 1em 0 1em;
+}
+
+.gameBoard-scoreColumn-number {
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 3em;
+  margin: 1em 1em 0 1em;
+}
+
+.gameBoard-scoreColumn-line {
+  color: #ffffff;
+  border: 1px solid white;
+  margin: 1em 1em 0 1em;
+  height: 0;
+}
+
+.gameBoard-section-cardTable {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.cardTable-section-cardContainer {
+  width: 25%;
+  height: 30%;
+}
+
+.skewLeft {
+  transform: rotate(-20deg);
+}
