@@ -10,23 +10,27 @@
 
 <body>
   <header>
-    <button class="header-image-navButton">
-      <img src="/.images/nav-button.png">
+    <button class="header-button-navButton">
+      <img src="./images/nav-button.png" class="header-navButton-image">
     </button>
     <h1>Which Hank Azaria</h1>
   </header>
   <main>
-    <section class="body-section-displayScreen enterPage">
+    <section class="body-section-displayScreen enterPage hidden" id="enterPageScreen">
       <section class="enterPage-section-playerInputs">
-        <input type="text" name="player1" class="enterPage-playerInputs-input"></input>
-        <label for="player1" class="enterPage-playerInputs-label">PLAYER 1</label>
-        <input type="text" name="player2" class="enterPage-playerInputs-input"></input>
-        <label for="player2" class="enterPage-playerInputs-label">PLAYER 2</label>
+        <div class="playerInputs-container-buttonAndLabel">
+          <input type="text" name="player1" class="enterPage-playerInputs-input" maxlength="32" id="player1Input"></input>
+          <label for="player1" class="enterPage-playerInputs-label">PLAYER 1</label>
+        </div>
+        <div class="playerInputs-container-buttonAndLabel">
+          <input type="text" name="player2" class="enterPage-playerInputs-input" maxlength="32" id="player2Input"></input>
+          <label for="player2" class="enterPage-playerInputs-label">PLAYER 2</label>
+        </div>
       </section>
-      <button class="enterPage-button-playGameButton">PLAY GAME</button>
+      <button disabled class="enterPage-button-playGameButton" id="enterGameButton">PLAY GAME</button>
     </section>
-    <section class="body-section-displayScreen welcomePage">
-      <h2 class="displayScreen-header welcomeHeader">WELCOME PLAYER 1 NAME AND PLAYER 2 NAME!</h2>
+    <section class="body-section-displayScreen welcomePage hidden" id="welcomePageScreen">
+      <h2 class="displayScreen-header welcomeHeader" id="welcomeHeaderText">WELCOME PLAYER 1 NAME AND PLAYER 2 NAME!</h2>
       <p class="displayScreen-text directions">The goal of the game is to find all 5 pairs of cards as quickly as possible. The player tht finds the greatest number of pairs, wins.</p>
       <p class="displayScreen-text directions">To begin playing, the player whose name is highlighted can click any card in the pile. It will flip over and reveal a picture of Beyonce. Click another card. If they match, they will disappear and you
         will have completed a match! If they don't, you'll have three seconds to look at them before they flip over. Then it's time for the other player to try!</p>
@@ -40,87 +44,97 @@
         <div class="gameBoard-scoreColumn-line"></div>
         <p class="gameBoard-scoreColumn-lightText">MATCHES THIS ROUND</p>
         <p class="gameBoard-scoreColumn-number">5</p>
-        <div></div>
+        <div class="gameBoard-scoreColumn-line"></div>
         <p class="gameBoard-scoreColumn-heavyText">GAME WINS</p>
         <section class="scoreColumn-section-roundsTracker">
-          <p class="gameBoard-scoreColumn-lightText"></p>
-          <p class="gameBoard-scoreColumn-lightText"></p>
+          <p class="gameBoard-scoreColumn-lightText">Round 1 xyz seconds</p>
+          <p class="gameBoard-scoreColumn-lightText">Round 1 xyz seconds</p>
         </section>
         <section class="scoreColumn-section-roundsTracker">
-          <p class="gameBoard-scoreColumn-lightText"></p>
-          <p class="gameBoard-scoreColumn-lightText"></p>
+          <p class="gameBoard-scoreColumn-lightText">Round 1 xyz seconds</p>
+          <p class="gameBoard-scoreColumn-lightText">Round 1 xyz seconds</p>
         </section>
       </section>
       <section class="gameBoard-section-cardTable">
+        <section class="cardTable-section-cardContainer slightSkew">
+          <figure class="cardContainer-figure-card">
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
+          </figure>
+        </section>
         <section class="cardTable-section-cardContainer skewLeft">
           <figure class="cardContainer-figure-card">
-            <img scr=></img>
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
           </figure>
         </section>
         <section class="cardTable-section-cardContainer skewRight">
           <figure class="cardContainer-figure-card">
-            <img scr=></img>
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
           </figure>
         </section>
         <section class="cardTable-section-cardContainer noSkew">
           <figure class="cardContainer-figure-card">
-            <img scr=></img>
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
           </figure>
         </section>
         <section class="cardTable-section-cardContainer skewRight">
           <figure class="cardContainer-figure-card">
-            <img scr=></img>
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
           </figure>
         </section>
         <section class="cardTable-section-cardContainer skewLeft">
           <figure class="cardContainer-figure-card">
-            <img scr=></img>
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
           </figure>
         </section>
         <section class="cardTable-section-cardContainer slightSkew">
           <figure class="cardContainer-figure-card">
-            <img scr=></img>
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
           </figure>
         </section>
         <section class="cardTable-section-cardContainer skewRight">
           <figure class="cardContainer-figure-card">
-            <img scr=></img>
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
           </figure>
         </section>
         <section class="cardTable-section-cardContainer slightSkew">
           <figure class="cardContainer-figure-card">
-            <img scr=></img>
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
           </figure>
         </section>
         <section class="cardTable-section-cardContainer skewRight">
           <figure class="cardContainer-figure-card">
-            <img scr=></img>
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
           </figure>
         </section>
         <section class="cardTable-section-cardContainer slightSkew">
           <figure class="cardContainer-figure-card">
-            <img scr=></img>
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
           </figure>
         </section>
+          <section class="cardTable-section-cardContainer slightSkew">
+            <figure class="cardContainer-figure-card">
+              <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
+            </figure>
+          </section>
       </section>
       <section class="gameBoard-section-scoreColumn">
         <p class="gameBoard-scoreColumn-heavyText">Player 1 Name</p>
         <p class="gameBoard-scoreColumn-lightText">Top Player</p>
-        <div></div>
+        <div class="gameBoard-scoreColumn-line"></div>
         <p class="gameBoard-scoreColumn-lightText">MATCHES THIS ROUND</p>
         <p class="gameBoard-scoreColumn-number">5</p>
-        <div></div>
+        <div class="gameBoard-scoreColumn-line"></div>
         <p class="gameBoard-scoreColumn-heavyText">GAME WINS</p>
         <section class="scoreColumn-section-roundsTracker">
-          <p class="gameBoard-scoreColumn-lightText"></p>
-          <p class="gameBoard-scoreColumn-lightText"></p>
+          <p class="gameBoard-scoreColumn-lightText">Round 1 xyz seconds</p>
+          <p class="gameBoard-scoreColumn-lightText">Round 1 xyz seconds</p>
         </section>
         <section class="scoreColumn-section-roundsTracker">
           <p class="gameBoard-scoreColumn-lightText"></p>
           <p class="gameBoard-scoreColumn-lightText"></p>
         </section>
       </section>
-      <section class="body-section-displayScreen winnerPage">
+      <section class="body-section-displayScreen winnerPage hidden">
         <h2 class="displayScreen-header winnerHeader">CONGRATULATIONS, PLAYER 1 NAME WINS!</h2>
         <p class="displayScreen-text-heavy">It took you x seconds.</p>
         <p class="displayScreen-text">Click below to keep playing</p>
