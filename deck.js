@@ -4,4 +4,13 @@ class Deck {
     this.matchedCards = matchedCards;
     this.selectedCards = selectedCards;
   }
+  shuffle() {
+
+  }
+  checkSelectedCards() {
+
+  }
+  moveToMatched(array) {
+    
+  }
 }

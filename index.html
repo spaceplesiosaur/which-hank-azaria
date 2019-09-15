@@ -16,7 +16,7 @@
     <h1>Which Hank Azaria</h1>
   </header>
   <main>
-    <section class="body-section-displayScreen enterPage hidden" id="enterPageScreen">
+    <section class="body-section-displayScreen enterPage" id="enterPageScreen">
       <section class="enterPage-section-playerInputs">
         <div class="playerInputs-container-buttonAndLabel">
           <input type="text" name="player1" class="enterPage-playerInputs-input" maxlength="32" id="player1Input"></input>
@@ -35,9 +35,9 @@
       <p class="displayScreen-text directions">To begin playing, the player whose name is highlighted can click any card in the pile. It will flip over and reveal a picture of Beyonce. Click another card. If they match, they will disappear and you
         will have completed a match! If they don't, you'll have three seconds to look at them before they flip over. Then it's time for the other player to try!</p>
       <p class="displayScreen-text directions">After you play, you'll see the name of the final winner and how long it took to win the game.</p>
-      <button class="welcomePage-button-playGame">PLAY GAME</button>
+      <button class="welcomePage-button-playGame" id="playGameButton">PLAY GAME</button>
     </section>
-    <section class="body-section-gameBoard">
+    <section class="body-section-gameBoard hidden" id="gameBoardScreen">
       <section class="gameBoard-section-scoreColumn">
         <p class="gameBoard-scoreColumn-heavyText">Player 1 Name</p>
         <p class="gameBoard-scoreColumn-lightText">Top Player</p>
@@ -55,8 +55,8 @@
           <p class="gameBoard-scoreColumn-lightText">Round 1 xyz seconds</p>
         </section>
       </section>
-      <section class="gameBoard-section-cardTable">
-        <section class="cardTable-section-cardContainer slightSkew">
+      <section class="gameBoard-section-cardTable" id="cardTable">
+        <!-- <section class="cardTable-section-cardContainer slightSkew">
           <figure class="cardContainer-figure-card">
             <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
           </figure>
@@ -111,11 +111,11 @@
             <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
           </figure>
         </section>
-          <section class="cardTable-section-cardContainer slightSkew">
-            <figure class="cardContainer-figure-card">
-              <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
-            </figure>
-          </section>
+        <section class="cardTable-section-cardContainer slightSkew">
+          <figure class="cardContainer-figure-card">
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
+          </figure>
+        </section> -->
       </section>
       <section class="gameBoard-section-scoreColumn">
         <p class="gameBoard-scoreColumn-heavyText">Player 1 Name</p>
@@ -134,6 +134,7 @@
           <p class="gameBoard-scoreColumn-lightText"></p>
         </section>
       </section>
+    </section>
       <section class="body-section-displayScreen winnerPage hidden">
         <h2 class="displayScreen-header winnerHeader">CONGRATULATIONS, PLAYER 1 NAME WINS!</h2>
         <p class="displayScreen-text-heavy">It took you x seconds.</p>
