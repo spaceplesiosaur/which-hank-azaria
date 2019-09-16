@@ -12,6 +12,7 @@ var buttonParent = document.getElementById('buttonParent');
 var winnerScreen = document.getElementById('winnerScreen');
 var columnNamePlayer1 = document.getElementById('columnNamePlayer1');
 var winnerHeader = document.getElementById('winnerHeader');
+var winnerTime = document.getElementById('winnerTime');
 var picturesArray = ['./images/Blue-Raja-Mystery-Men-Hank-Azaria-b.jpg', './images/hank-agador.jpg', './images/hank-comic-book.gif', './images/Hank-cradle.jpg', './images/hank-david.jpg', './images/hank-smufs.jpg']
 // var cardsArray = [];
 var deckArray = [];
@@ -159,7 +160,7 @@ function shuffleSkews() {
 }
 
 function instantiateDeck() {
-  var deck = new Deck([], [], []);
+  var deck = new Deck([], [], [], Date.now());
   deckArray.push(deck);
 }
 
@@ -197,9 +198,9 @@ function flipCard(event) {
   matchCards();
   console.log("SELECTED CARDS", deckArray[0].selectedCards);
   console.log("MATCHED CARDS ARRAY", deckArray[0].matchedCards);
-  setTimeout(flipCardBack, (3 * 1000), cardToFlip, event);
-  setTimeout(flippedRules, (3.1 * 1000), cardToFlip, event);
-  setTimeout(updateMatchCount, (3.2 * 1000));
+  setTimeout(flipCardBack, (2 * 1000), cardToFlip, event);
+  setTimeout(flippedRules, (2.1 * 1000), cardToFlip, event);
+  setTimeout(updateMatchCount, (2.2 * 1000));
   openWinnerScreen();
   // event.target.src = cardToFlip.image;
 }
@@ -268,6 +269,9 @@ function openWinnerScreen() {
   if (deckArray[0].matches/2 === 5) {
     winnerScreen.classList.remove('hidden');
     gameBoardScreen.classList.add('hidden');
+    deckArray[0].endTime = Date.now();
+    deckArray[0].totalTime = (deckArray[0].endTime - deckArray[0].startTime);
+    winnerTime.innerHTML = `It took you ${deckArray[0].totalTime/60} minutes and ${deckArray[0].totalTime%60} seconds.`
   }
 }
 
