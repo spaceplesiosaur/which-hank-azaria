@@ -229,6 +229,11 @@ function htmlToAddCards(card) {
   </section>`
 }
 
+// <section class="cardTable-section-cardContainer">
+//   <figure class="cardContainer-figure-card">
+//     <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
+//   </figure>
+// </section>
 //instantiate new cards twice.  use a for loop that runs 5 times.
 //each card gets a matchedInfo number. 0++.
 //each card gets an image.  The images will be in a global array. They will assigned when arguments are put in as pictureArray[matchedInfoNumber -1]

@@ -12,8 +12,10 @@ body {
 
 header {
   display: flex;
-  justify-content: space-between;
-  align-self: center;
+  flex-direction: row;
+  /* justify-content: space-between; */
+
+  /* align-self: center; */
   height: 10%;
   background: #ffffff;
 }
@@ -32,7 +34,7 @@ img.hidden {
 
 .header-button-navButton {
   width: 8%;
-  height: 8%;
+  /* height: 8%; */
   padding: 0;
 }
 
@@ -45,8 +47,10 @@ img.hidden {
 h1 {
   font-size: 2em;
   weight: 800;
-  margin-right: 35%;
-  align-items: center;
+  margin: 2% 30% 0 30%;
+  /* margin-right: 35%; */
+
+
 }
 
 .body-section-displayScreen {
@@ -84,6 +88,7 @@ h1 {
 }
 .enterPage-playerInputs-label {
   color: #010101;
+  text-align: left;
 }
 
 .enterPage-section-buttonAndLabel {
@@ -96,6 +101,8 @@ h1 {
   background-color: #010101;
   width: 100%;
   color: #ffffff;
+  font-size: 1.25em;
+  font-weight: 800;
   text-align: center;
   margin: 7% 0 0 0;
   padding: 2%;
@@ -109,10 +116,19 @@ h1 {
   padding: 2%;
 }
 
+.welcomePage-section-welcomeText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+}
+
 .welcomePage-button-playGame {
   background-color: #010101;
   width: 55%;
   color: #ffffff;
+  font-size: 1.25em;
+  font-weight: 800;
   text-align: center;
   margin: 7% 0 12% 0;
   padding: 2%;
@@ -131,13 +147,17 @@ h1 {
   color: #010101;
   font-size: 1em;
   weight: 400;
-  /* margin-bottom: 10% 0 7% 0; */
   width: 60%;
   text-align: left;
 }
 
+p.directions {
+  text-align: left;
+  margin: 0 0 5% 0;
+}
+
 h2.welcomeHeader {
-  width: 75%;
+  width: 90%;
   font-size: 1.5em;
 }
 
@@ -191,7 +211,7 @@ h2.welcomeHeader {
 
 .cardTable-section-cardContainer {
   width: 180px;
-  height: 300px;
+  height: 250px;
 
 }
 
@@ -214,8 +234,8 @@ h2.welcomeHeader {
 .cardContainer-figure-card {
   border: 1px solid black;
   margin: 2em;
-  width:  100px
-  height: 167px;
+  width:  65%;
+  height: 70%;
 }
 
 .figure-card-image {
@@ -223,8 +243,34 @@ h2.welcomeHeader {
   width: 100%;
 }
 
+h2.winnerHeader {
+  font-size: 1.5em;
+}
+
+p.displayScreen-text-heavy {
+  margin: 0 0 5% 0;
+  font-weight: 800;
+  font-size: 1.25em;
+}
+
+p.prompt {
+  margin: 0 0 5% 0;
+  font-size: 1.25em;
+}
+
 .winnerPage-section-buttonSection {
   display: flex;
   justify-content: space-between;
-  width: 60%;
+  width: 70%;
+}
+
+.winnerPage-button-newGame {
+  background-color: #010101;
+  width: 40%;
+  color: #ffffff;
+  font-size: 1.25em;
+  font-weight: 800;
+  text-align: center;
+  margin: 10% 0 10% 0;
+  padding: 1%;
 }
