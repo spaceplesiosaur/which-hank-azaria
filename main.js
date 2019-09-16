@@ -8,12 +8,13 @@ var playGameButton = document.getElementById('playGameButton');
 var gameBoardScreen = document.getElementById('gameBoardScreen');
 var cardTable = document.getElementById('cardTable');
 var matchCounterPlayer1 = document.getElementById('matchCounterPlayer1');
+var buttonParent = document.getElementById('buttonParent');
 var picturesArray = ['./images/Blue-Raja-Mystery-Men-Hank-Azaria-b.jpg', './images/hank-agador.jpg', './images/hank-comic-book.gif', './images/Hank-cradle.jpg', './images/hank-david.jpg', './images/hank-smufs.jpg']
 var cardsArray = [];
 var deckArray = [];
 
-player1Input.addEventListener('keyup', checkNameField);
-// enterGameButton.addEventListener('click', enterGameButtonRules);
+// player1Input.addEventListener('keyup', checkNameField);
+// playGameButton.addEventListener('click', enterGameButtonRules);
 enterGameButton.addEventListener('click', onEnterGameButton);
 playGameButton.addEventListener('click', openGameBoard);
 playGameButton.addEventListener('click', instantiateNewCards);
@@ -26,9 +27,10 @@ cardTable.addEventListener('click', flipCard);
 
 function onEnterGameButton() {
   console.log("onEnter ran");
-  enterGameButtonRules();
+  checkNameField();
+  // enterGameButtonRules();
   fillPlayerName();
-  openWelcomeScreen();
+  // openWelcomeScreen();
 }
 
 function fillPlayerName() {
@@ -39,19 +41,21 @@ function fillPlayerName() {
 function checkNameField() {
   console.log("checkNameField ran");
   if (player1Input.value !== "") {
-    enterGameButton.disabled = false;
+    // enterGameButton.disabled = false;
+    openWelcomeScreen();
   } else {
-    enterGameButton.disabled = true;
+    // enterGameButton.disabled = true;
+    enterGameLabel.classList.remove('hidden');
     // enterGameButton.innerText = "Please enter a name";
     // enterGameButton.classList.add('.enterPage-button-playGameButton-error')
   }
 }
 
-function enterGameButtonRules() {
-  if (enterGameButton.disabled === true) {
-    enterGameLabel.classList.remove('hidden');
-  }
-}
+// function enterGameButtonRules() {
+//   if (enterGameButton.disabled === true) {
+//     enterGameLabel.classList.remove('hidden');
+//   }
+// }
 
 function openWelcomeScreen() {
   welcomePageScreen.classList.remove('hidden');
@@ -113,7 +117,7 @@ function flipCard(event) {
   cardToFlip.flipped = true;
   flippedRules(cardToFlip, event);
   matchCards();
-  console.log(deckArray[0].matchedCards);
+  console.log("MATCHED CARDS ARRAY", deckArray[0].matchedCards);
   setTimeout(flipCardBack, (6 * 1000), cardToFlip, event);
   setTimeout(flippedRules, (7 * 1000), cardToFlip, event);
   updateMatchCount();

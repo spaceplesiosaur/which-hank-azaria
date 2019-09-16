@@ -18,9 +18,9 @@ class Deck {
   }
   moveToMatched(array) {
     for (var i = 0; i < array.length; i++) {
-    array[i].match();
-    this.matchedCards.push(array[i]);
-    this.matches = this.matchedCards.length;
+      array[i].match();
+      this.matchedCards.push(array[i]);
+      this.matches = this.matchedCards.length;
     }
   }
 }
