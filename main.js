@@ -271,7 +271,7 @@ function openWinnerScreen() {
     gameBoardScreen.classList.add('hidden');
     deckArray[0].endTime = Date.now();
     deckArray[0].totalTime = (deckArray[0].endTime - deckArray[0].startTime);
-    winnerTime.innerHTML = `It took you ${deckArray[0].totalTime/60} minutes and ${deckArray[0].totalTime%60} seconds.`
+    winnerTime.innerHTML = `It took you ${Math.floor((deckArray[0].totalTime/1000)/60)} minutes and ${Math.floor((deckArray[0].totalTime/1000) % 60)} seconds.`
   }
 }
 
