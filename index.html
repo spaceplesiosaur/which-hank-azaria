@@ -27,7 +27,10 @@
           <label for="player2" class="enterPage-playerInputs-label">PLAYER 2</label>
         </div>
       </section>
-      <button disabled class="enterPage-button-playGameButton" id="enterGameButton">PLAY GAME</button>
+      <section class="enterPage-section-buttonAndLabel">
+        <button disabled name="playGame" class="enterPage-button-playGameButton" id="enterGameButton">PLAY GAME</button>
+        <label for="playGame" class="enterPage-button-label hidden" id="enterGameLabel">PLEASE ENTER YOUR NAME</label>
+      </section>
     </section>
     <section class="body-section-displayScreen welcomePage hidden" id="welcomePageScreen">
       <h2 class="displayScreen-header welcomeHeader" id="welcomeHeaderText">WELCOME PLAYER 1 NAME AND PLAYER 2 NAME!</h2>
@@ -43,7 +46,7 @@
         <p class="gameBoard-scoreColumn-lightText">Top Player</p>
         <div class="gameBoard-scoreColumn-line"></div>
         <p class="gameBoard-scoreColumn-lightText">MATCHES THIS ROUND</p>
-        <p class="gameBoard-scoreColumn-number">5</p>
+        <p class="gameBoard-scoreColumn-number" id="matchCounterPlayer1">0</p>
         <div class="gameBoard-scoreColumn-line"></div>
         <p class="gameBoard-scoreColumn-heavyText">GAME WINS</p>
         <section class="scoreColumn-section-roundsTracker">

@@ -1,19 +1,24 @@
 var player1Input = document.getElementById('player1Input');
 var enterGameButton = document.getElementById('enterGameButton');
+var enterGameLabel = document.getElementById('enterGameLabel');
 var welcomeHeaderText = document.getElementById('welcomeHeaderText');
 var welcomePageScreen = document.getElementById('welcomePageScreen');
 var enterPageScreen = document.getElementById('enterPageScreen');
 var playGameButton = document.getElementById('playGameButton');
 var gameBoardScreen = document.getElementById('gameBoardScreen');
 var cardTable = document.getElementById('cardTable');
+var matchCounterPlayer1 = document.getElementById('matchCounterPlayer1');
 var picturesArray = ['./images/Blue-Raja-Mystery-Men-Hank-Azaria-b.jpg', './images/hank-agador.jpg', './images/hank-comic-book.gif', './images/Hank-cradle.jpg', './images/hank-david.jpg', './images/hank-smufs.jpg']
 var cardsArray = [];
+var deckArray = [];
 
 player1Input.addEventListener('keyup', checkNameField);
+// enterGameButton.addEventListener('click', enterGameButtonRules);
 enterGameButton.addEventListener('click', onEnterGameButton);
 playGameButton.addEventListener('click', openGameBoard);
 playGameButton.addEventListener('click', instantiateNewCards);
 playGameButton.addEventListener('click', instantiateMatchCards);
+playGameButton.addEventListener('click', instantiateDeck);
 cardTable.addEventListener('click', flipCard);
 // playGameButton.addEventListener('click', displayCards);
 
@@ -21,6 +26,7 @@ cardTable.addEventListener('click', flipCard);
 
 function onEnterGameButton() {
   console.log("onEnter ran");
+  enterGameButtonRules();
   fillPlayerName();
   openWelcomeScreen();
 }
@@ -36,8 +42,14 @@ function checkNameField() {
     enterGameButton.disabled = false;
   } else {
     enterGameButton.disabled = true;
-    enterGameButton.innerText = "Please enter a name";
-    enterGameButton.classList.add('.enterPage-button-playGameButton-error')
+    // enterGameButton.innerText = "Please enter a name";
+    // enterGameButton.classList.add('.enterPage-button-playGameButton-error')
+  }
+}
+
+function enterGameButtonRules() {
+  if (enterGameButton.disabled === true) {
+    enterGameLabel.classList.remove('hidden');
   }
 }
 
@@ -79,6 +91,11 @@ function instantiateMatchCards() {
   }
 }
 
+function instantiateDeck() {
+  var deck = new Deck(cardsArray, [], []);
+  deckArray.push(deck);
+}
+
 function displayCards(card) {
   cardTable.insertAdjacentHTML('beforeend', htmlToAddCards(card));
 }
@@ -88,19 +105,39 @@ function flipCard(event) {
   if (!event.target.class === 'figure-card-image') {
     return
   }
+  if (deckArray[0].selectedCards.length === 2) {
+    return;
+  }
   var cardHTMLId = parseInt(event.target.parentNode.parentNode.id);
   var cardToFlip = findCardInfoById(cardHTMLId);
-  cardToFlip.flipped = !cardToFlip.flipped;
+  cardToFlip.flipped = true;
   flippedRules(cardToFlip, event);
+  matchCards();
+  console.log(deckArray[0].matchedCards);
+  setTimeout(flipCardBack, (6 * 1000), cardToFlip, event);
+  setTimeout(flippedRules, (7 * 1000), cardToFlip, event);
+  updateMatchCount();
   // event.target.src = cardToFlip.image;
 }
 
 function flippedRules(card, eventSpot) {
   if (card.flipped === true) {
     eventSpot.target.src = card.image;
+    addToSelected(card);
   } else {
     eventSpot.target.src = "./images/hankAzariaBWphoto.jpg"
+    removeFromSelected();
   }
+}
+
+function matchCards() {
+  if ((deckArray[0].selectedCards.length % 2) === 0) {
+    deckArray[0].checkSelectedCards();
+  }
+}
+
+function updateMatchCount() {
+  matchCounterPlayer1.innerText = `${deckArray[0].matches}`;
 }
 
 function findCardInfoById(htmlId) {
@@ -108,6 +145,28 @@ function findCardInfoById(htmlId) {
     if (cardsArray[i].matchInfo === htmlId) {
       return cardsArray[i];
     }
+  }
+}
+
+function addToSelected(card) {
+  deckArray[0].selectedCards.push(card);
+}
+
+function removeFromSelected() {
+  deckArray[0].selectedCards.pop();
+}
+
+// function limitTwoCards() {
+//   if (deckArray[0].selectedCards.length === 2) {
+//     return;
+//   }
+// }
+
+function flipCardBack(card, eventSpot) {
+  if (card.matched === true) {
+    eventSpot.target.classList.add('hidden');
+  } else {
+    card.flipped = false;
   }
 }
 

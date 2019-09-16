@@ -22,6 +22,14 @@ section.hidden {
   display: none;
 }
 
+label.hidden {
+    display: none;
+}
+
+img.hidden {
+  display: none;
+}
+
 .header-button-navButton {
   width: 8%;
   height: 8%;
@@ -78,21 +86,26 @@ h1 {
   color: #010101;
 }
 
-.enterPage-button-playGameButton {
-  background-color: #010101;
+.enterPage-section-buttonAndLabel {
   width: 55%;
-  color: #ffffff;
-  text-align: center;
   margin: 7% 0 12% 0;
   padding: 2%;
 }
 
-button.enterPage-button-playGameButton-error {
+.enterPage-button-playGameButton {
   background-color: #010101;
+  width: 100%;
+  color: #ffffff;
+  text-align: center;
+  margin: 7% 0 0 0;
+  padding: 2%;
+}
+
+.enterPage-button-label {
   width: 55%;
   color: #FF0000;
+  font-weight: 800;
   text-align: center;
-  margin: 7% 0 12% 0;
   padding: 2%;
 }
 

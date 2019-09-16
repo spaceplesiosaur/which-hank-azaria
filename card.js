@@ -6,6 +6,6 @@ class Card {
     this.image = image;
   }
   match() {
-
+    this.matched = true;
   }
 }
