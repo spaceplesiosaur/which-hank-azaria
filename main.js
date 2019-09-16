@@ -9,8 +9,11 @@ var gameBoardScreen = document.getElementById('gameBoardScreen');
 var cardTable = document.getElementById('cardTable');
 var matchCounterPlayer1 = document.getElementById('matchCounterPlayer1');
 var buttonParent = document.getElementById('buttonParent');
+var winnerScreen = document.getElementById('winnerScreen');
+var columnNamePlayer1 = document.getElementById('columnNamePlayer1');
+var winnerHeader = document.getElementById('winnerHeader');
 var picturesArray = ['./images/Blue-Raja-Mystery-Men-Hank-Azaria-b.jpg', './images/hank-agador.jpg', './images/hank-comic-book.gif', './images/Hank-cradle.jpg', './images/hank-david.jpg', './images/hank-smufs.jpg']
-var cardsArray = [];
+// var cardsArray = [];
 var deckArray = [];
 
 // player1Input.addEventListener('keyup', checkNameField);
@@ -36,7 +39,10 @@ function onEnterGameButton() {
 
 function fillPlayerName() {
   console.log(player1Input.value);
-  welcomeHeaderText.innerText = `WELCOME ${player1Input.value.toUpperCase()} AND PLAYER 2 NAME!`
+  welcomeHeaderText.innerText = `WELCOME ${player1Input.value.toUpperCase()} AND PLAYER 2 NAME!`;
+  columnNamePlayer1.innerText = `${player1Input.value.toUpperCase()}`;
+  winnerHeader.innerText = `CONGRATULATIONS, ${player1Input.value.toUpperCase()} WINS!`
+
 }
 
 function checkNameField() {
@@ -71,11 +77,14 @@ function openWelcomeScreen() {
 // }
 function onPlayGame() {
   openGameBoard();
+  instantiateDeck();
   instantiateNewCards();
   instantiateMatchCards();
-  shuffleDeck(cardsArray);
+  // shuffleDeck(cardsArray);
+  // shuffleDeck(deckArray[0].cards);
+  deckArray[0].shuffle();
   displayCards();
-  instantiateDeck();
+  // instantiateDeck();
 }
 
 function openGameBoard() {
@@ -88,31 +97,48 @@ function instantiateNewCards() {
   for (var cardNumber = 0; cardNumber < 5; cardNumber++) {
     matchInfo = matchInfo + 1;
     var card = new Card(matchInfo, picturesArray[matchInfo-1], shuffleSkews());
-    cardsArray.push(card);
-    // displayCards(card);
+    deckArray[0].cards.push(card);
   }
-  // return cardsArray;
 }
+
+// function instantiateNewCards() {
+//   var matchInfo = 0;
+//   for (var cardNumber = 0; cardNumber < 5; cardNumber++) {
+//     matchInfo = matchInfo + 1;
+//     var card = new Card(matchInfo, picturesArray[matchInfo-1], shuffleSkews());
+//     cardsArray.push(card);
+//   }
+// }
 
 function instantiateMatchCards() {
   var matchInfo = 0;
   for (var cardNumber = 0; cardNumber < 5; cardNumber++) {
     matchInfo = matchInfo + 1;
     var card = new Card(matchInfo, picturesArray[matchInfo-1], shuffleSkews());
-    cardsArray.push(card);
+    deckArray[0].cards.push(card);
     // displayCards(card);
   }
 }
 
-function shuffleDeck(array) {
-  for (var i = array.length -1; i >= 0; i--) {
-    var randomIndex = Math.floor(Math.random() * (i + 1));
-    var chosenArrayItem = array[i];
-    var randomArrayItem = array[randomIndex];
-    array[i] = randomArrayItem;
-    array[randomIndex] = chosenArrayItem;
-  }
-}
+// function instantiateMatchCards() {
+//   var matchInfo = 0;
+//   for (var cardNumber = 0; cardNumber < 5; cardNumber++) {
+//     matchInfo = matchInfo + 1;
+//     var card = new Card(matchInfo, picturesArray[matchInfo-1], shuffleSkews());
+//     cardsArray.push(card);
+//     // displayCards(card);
+//   }
+// }
+
+// function shuffleDeck(array) {
+//   for (var i = array.length -1; i >= 0; i--) {
+//     var randomIndex = Math.floor(Math.random() * (i + 1));
+//     var chosenArrayItem = array[i];
+//     var randomArrayItem = array[randomIndex];
+//     array[i] = randomArrayItem;
+//     array[randomIndex] = chosenArrayItem;
+//   }
+// }
 //Fisher-Yates Shuffle
 
 function shuffleSkews() {
@@ -133,19 +159,27 @@ function shuffleSkews() {
 }
 
 function instantiateDeck() {
-  var deck = new Deck(cardsArray, [], []);
+  var deck = new Deck([], [], []);
   deckArray.push(deck);
 }
 
+// function instantiateDeck() {
+//   var deck = new Deck(cardsArray, [], []);
+//   deckArray.push(deck);
+// }
+
 function displayCards() {
-  for (var i = 0; i < cardsArray.length; i++) {
-    cardTable.insertAdjacentHTML('beforeend', htmlToAddCards(cardsArray[i]));
+  for (var i = 0; i < deckArray[0].cards.length; i++) {
+    cardTable.insertAdjacentHTML('beforeend', htmlToAddCards(deckArray[0].cards[i]));
   }
 
 }
 
-// function displayCards(card) {
-//   cardTable.insertAdjacentHTML('beforeend', htmlToAddCards(card));
+// function displayCards() {
+//   for (var i = 0; i < cardsArray.length; i++) {
+//     cardTable.insertAdjacentHTML('beforeend', htmlToAddCards(cardsArray[i]));
+//   }
+//
 // }
 
 function flipCard(event) {
@@ -166,6 +200,7 @@ function flipCard(event) {
   setTimeout(flipCardBack, (3 * 1000), cardToFlip, event);
   setTimeout(flippedRules, (3.1 * 1000), cardToFlip, event);
   setTimeout(updateMatchCount, (3.2 * 1000));
+  openWinnerScreen();
   // event.target.src = cardToFlip.image;
 }
 
@@ -191,12 +226,20 @@ function updateMatchCount() {
 }
 
 function findCardInfoById(htmlId) {
-  for (var i = 0; i < cardsArray.length; i++) {
-    if (cardsArray[i].matchInfo === htmlId) {
-      return cardsArray[i];
+  for (var i = 0; i < deckArray[0].cards.length; i++) {
+    if (deckArray[0].cards[i].matchInfo === htmlId) {
+      return deckArray[0].cards[i];
     }
   }
 }
+
+// function findCardInfoById(htmlId) {
+//   for (var i = 0; i < cardsArray.length; i++) {
+//     if (cardsArray[i].matchInfo === htmlId) {
+//       return cardsArray[i];
+//     }
+//   }
+// }
 
 function addToSelected(card) {
   deckArray[0].selectedCards.push(card);
@@ -218,6 +261,13 @@ function flipCardBack(card, eventSpot) {
     card.flipped = false;
   } else {
     card.flipped = false;
+  }
+}
+
+function openWinnerScreen() {
+  if (deckArray[0].matches/2 === 5) {
+    winnerScreen.classList.remove('hidden');
+    gameBoardScreen.classList.add('hidden');
   }
 }
 

@@ -6,8 +6,23 @@ class Deck {
     this.matches = 0;
   }
   shuffle() {
-
+      for (var i = this.cards.length -1; i >= 0; i--) {
+        var randomIndex = Math.floor(Math.random() * (i + 1));
+        var chosenArrayItem = this.cards[i];
+        var randomArrayItem = this.cards[randomIndex];
+        this.cards[i] = randomArrayItem;
+        this.cards[randomIndex] = chosenArrayItem;
+    }
   }
+  // shuffle(array) {
+  //     for (var i = array.length -1; i >= 0; i--) {
+  //       var randomIndex = Math.floor(Math.random() * (i + 1));
+  //       var chosenArrayItem = array[i];
+  //       var randomArrayItem = array[randomIndex];
+  //       array[i] = randomArrayItem;
+  //       array[randomIndex] = chosenArrayItem;
+  //   }
+  // }
   checkSelectedCards() {
     if (this.selectedCards[0].matchInfo === this.selectedCards[1].matchInfo) {
       this.moveToMatched(this.selectedCards);
