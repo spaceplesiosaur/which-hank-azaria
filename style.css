@@ -190,7 +190,8 @@ h2.welcomeHeader {
 }
 
 .cardTable-section-cardContainer {
-  width: 24%;
+  width: 180px;
+  height: 300px;
 
 }
 
@@ -206,9 +207,14 @@ h2.welcomeHeader {
   transform: rotate(5deg);
 }
 
+.noSkew {
+  transform: rotate(0deg);
+}
+
 .cardContainer-figure-card {
   border: 1px solid black;
   margin: 2em;
+  width:  100px
   height: 167px;
 }
 

@@ -16,10 +16,11 @@ var deckArray = [];
 // player1Input.addEventListener('keyup', checkNameField);
 // playGameButton.addEventListener('click', enterGameButtonRules);
 enterGameButton.addEventListener('click', onEnterGameButton);
-playGameButton.addEventListener('click', openGameBoard);
-playGameButton.addEventListener('click', instantiateNewCards);
-playGameButton.addEventListener('click', instantiateMatchCards);
-playGameButton.addEventListener('click', instantiateDeck);
+playGameButton.addEventListener('click', onPlayGame);
+// playGameButton.addEventListener('click', openGameBoard);
+// playGameButton.addEventListener('click', instantiateNewCards);
+// playGameButton.addEventListener('click', instantiateMatchCards);
+// playGameButton.addEventListener('click', instantiateDeck);
 cardTable.addEventListener('click', flipCard);
 // playGameButton.addEventListener('click', displayCards);
 
@@ -68,6 +69,14 @@ function openWelcomeScreen() {
 //   instantiateNewCards()
 //   displayCards(instantiateNewCards());
 // }
+function onPlayGame() {
+  openGameBoard();
+  instantiateNewCards();
+  instantiateMatchCards();
+  shuffleDeck(cardsArray);
+  displayCards();
+  instantiateDeck();
+}
 
 function openGameBoard() {
   gameBoardScreen.classList.remove('hidden');
@@ -78,9 +87,9 @@ function instantiateNewCards() {
   var matchInfo = 0;
   for (var cardNumber = 0; cardNumber < 5; cardNumber++) {
     matchInfo = matchInfo + 1;
-    var card = new Card(matchInfo, picturesArray[matchInfo-1]);
+    var card = new Card(matchInfo, picturesArray[matchInfo-1], shuffleSkews());
     cardsArray.push(card);
-    displayCards(card);
+    // displayCards(card);
   }
   // return cardsArray;
 }
@@ -89,9 +98,37 @@ function instantiateMatchCards() {
   var matchInfo = 0;
   for (var cardNumber = 0; cardNumber < 5; cardNumber++) {
     matchInfo = matchInfo + 1;
-    var card = new Card(matchInfo, picturesArray[matchInfo-1]);
+    var card = new Card(matchInfo, picturesArray[matchInfo-1], shuffleSkews());
     cardsArray.push(card);
-    displayCards(card);
+    // displayCards(card);
+  }
+}
+
+function shuffleDeck(array) {
+  for (var i = array.length -1; i >= 0; i--) {
+    var randomIndex = Math.floor(Math.random() * (i + 1));
+    var chosenArrayItem = array[i];
+    var randomArrayItem = array[randomIndex];
+    array[i] = randomArrayItem;
+    array[randomIndex] = chosenArrayItem;
+  }
+}
+//Fisher-Yates Shuffle
+
+function shuffleSkews() {
+  var randomSkew = Math.floor(Math.random() * 4);
+  console.log(randomSkew);
+  if (randomSkew === 0) {
+    return 'skewLeft';
+  }
+  if (randomSkew === 1) {
+    return 'skewRight';
+  }
+  if (randomSkew === 2) {
+    return 'slightSkew';
+  }
+  if (randomSkew === 3) {
+    return 'noSkew';
   }
 }
 
@@ -100,9 +137,16 @@ function instantiateDeck() {
   deckArray.push(deck);
 }
 
-function displayCards(card) {
-  cardTable.insertAdjacentHTML('beforeend', htmlToAddCards(card));
+function displayCards() {
+  for (var i = 0; i < cardsArray.length; i++) {
+    cardTable.insertAdjacentHTML('beforeend', htmlToAddCards(cardsArray[i]));
+  }
+
 }
+
+// function displayCards(card) {
+//   cardTable.insertAdjacentHTML('beforeend', htmlToAddCards(card));
+// }
 
 function flipCard(event) {
   console.log(event);
@@ -117,10 +161,11 @@ function flipCard(event) {
   cardToFlip.flipped = true;
   flippedRules(cardToFlip, event);
   matchCards();
+  console.log("SELECTED CARDS", deckArray[0].selectedCards);
   console.log("MATCHED CARDS ARRAY", deckArray[0].matchedCards);
-  setTimeout(flipCardBack, (6 * 1000), cardToFlip, event);
-  setTimeout(flippedRules, (7 * 1000), cardToFlip, event);
-  updateMatchCount();
+  setTimeout(flipCardBack, (3 * 1000), cardToFlip, event);
+  setTimeout(flippedRules, (3.1 * 1000), cardToFlip, event);
+  setTimeout(updateMatchCount, (3.2 * 1000));
   // event.target.src = cardToFlip.image;
 }
 
@@ -131,6 +176,7 @@ function flippedRules(card, eventSpot) {
   } else {
     eventSpot.target.src = "./images/hankAzariaBWphoto.jpg"
     removeFromSelected();
+    //need to be more sophisticated than a pop?
   }
 }
 
@@ -141,7 +187,7 @@ function matchCards() {
 }
 
 function updateMatchCount() {
-  matchCounterPlayer1.innerText = `${deckArray[0].matches}`;
+  matchCounterPlayer1.innerText = `${deckArray[0].matches/2}`;
 }
 
 function findCardInfoById(htmlId) {
@@ -169,13 +215,14 @@ function removeFromSelected() {
 function flipCardBack(card, eventSpot) {
   if (card.matched === true) {
     eventSpot.target.classList.add('hidden');
+    card.flipped = false;
   } else {
     card.flipped = false;
   }
 }
 
 function htmlToAddCards(card) {
-  return `<section class="cardTable-section-cardContainer" id="${card.matchInfo}">
+  return `<section class="cardTable-section-cardContainer ${card.skewClass}" id="${card.matchInfo}">
     <figure class="cardContainer-figure-card">
       <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
     </figure>

@@ -20,7 +20,8 @@ class Deck {
     for (var i = 0; i < array.length; i++) {
       array[i].match();
       this.matchedCards.push(array[i]);
-      this.matches = this.matchedCards.length;
+      // this.matches = this.matchedCards.length;
     }
+    this.matches = this.matchedCards.length;
   }
 }
