@@ -13,9 +13,13 @@ var winnerScreen = document.getElementById('winnerScreen');
 var columnNamePlayer1 = document.getElementById('columnNamePlayer1');
 var winnerHeader = document.getElementById('winnerHeader');
 var winnerTime = document.getElementById('winnerTime');
-var picturesArray = ['./images/Blue-Raja-Mystery-Men-Hank-Azaria-b.jpg', './images/hank-agador.jpg', './images/hank-comic-book.gif', './images/Hank-cradle.jpg', './images/hank-david.jpg', './images/hank-smufs.jpg']
+var winnerMenuContainer = document.getElementById('winnerMenuContainer');
+var winnerListButton = document.getElementById('winnerListButton');
+var newGameButton = document.getElementById('newGameButton');
+// var picturesArray = ['./images/Blue-Raja-Mystery-Men-Hank-Azaria-b.jpg', './images/hank-agador.jpg', './images/hank-comic-book.gif', './images/Hank-cradle.jpg', './images/hank-david.jpg', './images/hank-smufs.jpg']
 // var cardsArray = [];
 var deckArray = [];
+var playerArray = [];
 
 // player1Input.addEventListener('keyup', checkNameField);
 // playGameButton.addEventListener('click', enterGameButtonRules);
@@ -27,8 +31,14 @@ playGameButton.addEventListener('click', onPlayGame);
 // playGameButton.addEventListener('click', instantiateDeck);
 cardTable.addEventListener('click', flipCard);
 // playGameButton.addEventListener('click', displayCards);
+winnerListButton.addEventListener('click', highScoreMenu);
+newGameButton.addEventListener('click', startNewGame);
 
+savePlayerArrayOnrefresh(playerArray);
 
+function savePlayerArrayOnrefresh(array) {
+  localStorage.setItem("playerArray", JSON.stringify(array));
+}
 
 function onEnterGameButton() {
   console.log("onEnter ran");
@@ -43,7 +53,6 @@ function fillPlayerName() {
   welcomeHeaderText.innerText = `WELCOME ${player1Input.value.toUpperCase()} AND PLAYER 2 NAME!`;
   columnNamePlayer1.innerText = `${player1Input.value.toUpperCase()}`;
   winnerHeader.innerText = `CONGRATULATIONS, ${player1Input.value.toUpperCase()} WINS!`
-
 }
 
 function checkNameField() {
@@ -68,7 +77,6 @@ function checkNameField() {
 function openWelcomeScreen() {
   welcomePageScreen.classList.remove('hidden');
   enterPageScreen.classList.add('hidden');
-
 }
 
 // function onPlayGame() {
@@ -95,6 +103,7 @@ function openGameBoard() {
 
 function instantiateNewCards() {
   var matchInfo = 0;
+  var picturesArray = ['./images/Blue-Raja-Mystery-Men-Hank-Azaria-b.jpg', './images/hank-agador.jpg', './images/hank-comic-book.gif', './images/Hank-cradle.jpg', './images/hank-david.jpg', './images/hank-smufs.jpg'];
   for (var cardNumber = 0; cardNumber < 5; cardNumber++) {
     matchInfo = matchInfo + 1;
     var card = new Card(matchInfo, picturesArray[matchInfo-1], shuffleSkews());
@@ -113,6 +122,7 @@ function instantiateNewCards() {
 
 function instantiateMatchCards() {
   var matchInfo = 0;
+  var picturesArray = ['./images/Blue-Raja-Mystery-Men-Hank-Azaria-b.jpg', './images/hank-agador.jpg', './images/hank-comic-book.gif', './images/Hank-cradle.jpg', './images/hank-david.jpg', './images/hank-smufs.jpg'];
   for (var cardNumber = 0; cardNumber < 5; cardNumber++) {
     matchInfo = matchInfo + 1;
     var card = new Card(matchInfo, picturesArray[matchInfo-1], shuffleSkews());
@@ -160,7 +170,7 @@ function shuffleSkews() {
 }
 
 function instantiateDeck() {
-  var deck = new Deck([], [], [], Date.now());
+  var deck = new Deck([], [], [], Date.now(), player1Input.value.toUpperCase());
   deckArray.push(deck);
 }
 
@@ -172,6 +182,7 @@ function instantiateDeck() {
 function displayCards() {
   for (var i = 0; i < deckArray[0].cards.length; i++) {
     cardTable.insertAdjacentHTML('beforeend', htmlToAddCards(deckArray[0].cards[i]));
+    console.log(deckArray[0].cards);
   }
 
 }
@@ -275,11 +286,70 @@ function openWinnerScreen() {
   }
 }
 
+function highScoreMenu() {
+    saveWinnerInfo();
+    arrangeAllWinnerInfo();
+}
+
+function saveWinnerInfo() {
+  var playerInfo = {name: deckArray[0].player1Name, time: deckArray[0].totalTime}
+  var retrievedPlayerArray = JSON.parse(localStorage.getItem("playerArray"));
+  console.log('retrieved player array', retrievedPlayerArray);
+  retrievedPlayerArray.push(playerInfo);
+  console.log('new retrieved player array', retrievedPlayerArray);
+  localStorage.setItem("playerArray", JSON.stringify(retrievedPlayerArray));
+}
+
+function arrangeAllWinnerInfo() {
+  var retrievedPlayerArray = JSON.parse(localStorage.getItem("playerArray"));
+  var sortedArray = retrievedPlayerArray.sort(function(a, b){return a.time - b.time});
+  console.log('sorted array', sortedArray);
+  var rank = 0
+  winnerMenuContainer.innerHTML = "";
+  for (var i = 0; i < sortedArray.length; i++) {
+    var rank = rank + 1;
+    // winnerMenuContainer.innerHTML = htmlToAddWinnerList(sortedArray[i], rank);
+    winnerMenuContainer.insertAdjacentHTML('afterbegin', htmlToAddWinnerList(sortedArray[i], rank));
+    if (i === 5) {
+      return
+    }
+  }
+}
+
+function startNewGame() {
+  enterPageScreen.classList.remove('hidden');
+  winnerScreen.classList.add('hidden');
+  deckArray = [];
+  // deckArray[0].matchedCards = [];
+  cardTable.innerHTML = "";
+  // deckArray[0].cards = [];
+  // deckArray[0].matches = 0;
+}
+
+// function sortMethod(a, b) {
+//   return (a - b);
+// }
+
 function htmlToAddCards(card) {
   return `<section class="cardTable-section-cardContainer ${card.skewClass}" id="${card.matchInfo}">
     <figure class="cardContainer-figure-card">
-      <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
+      <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image" alt="back-of-card"></img>
     </figure>
+  </section>`
+}
+
+function htmlToAddWinnerList(info, ranking) {
+  return `<section class="winnderMenu-section-container">
+    <p class="gameBoard-scoreColumn-heavyText">${info.name}</p>
+    <p class="gameBoard-scoreColumn-lightText">#${ranking} Top Player</p>
+    <div class="gameBoard-scoreColumn-line"></div>`
+}
+
+function htmlWinnerListDefault() {
+  return `<section class="winnderMenu-section-container">
+    <p class="gameBoard-scoreColumn-heavyText">This could be you!</p>
+    <p class="gameBoard-scoreColumn-lightText">#1 Top Player</p>
+    <div class="gameBoard-scoreColumn-line"></div>
   </section>`
 }
 

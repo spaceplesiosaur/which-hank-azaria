@@ -1,5 +1,5 @@
 class Deck {
-  constructor(cards, matchedCards, selectedCards, startTime) {
+  constructor(cards, matchedCards, selectedCards, startTime, player1Name) {
     this.cards = cards;
     this.matchedCards = matchedCards;
     this.selectedCards = selectedCards;
@@ -7,6 +7,7 @@ class Deck {
     this.startTime = startTime;
     this.endTime = 0;
     this.totalTime = 0;
+    this.player1Name = player1Name;
   }
   shuffle() {
       for (var i = this.cards.length -1; i >= 0; i--) {
