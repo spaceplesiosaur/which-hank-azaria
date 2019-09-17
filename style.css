@@ -177,6 +177,12 @@ h2.welcomeHeader {
   margin: 1em;
 }
 
+section.gameBoard-section-scoreColumn-active {
+  background-color: #e1275f;
+  /* color: #010101; */
+  margin: 1em;
+}
+
 .gameBoard-scoreColumn-heavyText {
   color: #ffffff;
   font-weight: 800;

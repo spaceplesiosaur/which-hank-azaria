@@ -1,4 +1,5 @@
 var player1Input = document.getElementById('player1Input');
+var player2Input = document.getElementById('player2Input');
 var enterGameButton = document.getElementById('enterGameButton');
 var enterGameLabel = document.getElementById('enterGameLabel');
 var welcomeHeaderText = document.getElementById('welcomeHeaderText');
@@ -11,11 +12,14 @@ var matchCounterPlayer1 = document.getElementById('matchCounterPlayer1');
 var buttonParent = document.getElementById('buttonParent');
 var winnerScreen = document.getElementById('winnerScreen');
 var columnNamePlayer1 = document.getElementById('columnNamePlayer1');
+var columnNamePlayer2 = document.getElementById('columnNamePlayer2');
 var winnerHeader = document.getElementById('winnerHeader');
 var winnerTime = document.getElementById('winnerTime');
 var winnerMenuContainer = document.getElementById('winnerMenuContainer');
 var winnerListButton = document.getElementById('winnerListButton');
 var newGameButton = document.getElementById('newGameButton');
+var player1column = document.getElementById('player1column');
+var player2column = document.getElementById('player2column');
 // var deckArray = [];
 var playerArray = [];
 var theDeck;
@@ -41,7 +45,7 @@ function savePlayerArrayOnrefresh(array) {
 }
 
 function instantiateDeck() {
-  theDeck = new Deck([], [], []);
+  theDeck = new Deck([], [], [], [], []);
   // deckArray.push(deck);
 }
 
@@ -53,10 +57,10 @@ function onEnterGameButton() {
 
 function fillPlayerName() {
   console.log(player1Input.value);
-  welcomeHeaderText.innerText = `WELCOME ${player1Input.value.toUpperCase()} AND PLAYER 2 NAME!`;
+  welcomeHeaderText.innerText = `WELCOME ${player1Input.value.toUpperCase()} AND ${player2Input.value.toUpperCase()}!`;
   columnNamePlayer1.innerText = `${player1Input.value.toUpperCase()}`;
-  winnerHeader.innerText = `CONGRATULATIONS, ${player1Input.value.toUpperCase()} WINS!`
-  theDeck.player1Name = player1Input.value.toUpperCase();
+  columnNamePlayer2.innerText = `${player2Input.value.toUpperCase()}`;
+  // theDeck.player1Name = player1Input.value.toUpperCase();
 }
 
 function checkNameField() {
@@ -160,15 +164,40 @@ function flippedRules(card, eventSpot) {
   if (card.flipped === true) {
     eventSpot.target.src = card.image;
     addToSelected(card);
+    theDeck.turnCounter++;
+    console.log(theDeck.turnCounter);
   } else {
     eventSpot.target.src = "./images/hankAzariaBWphoto.jpg"
     removeFromSelected();
   }
 }
 
+// function determinePlayer() {
+//   if (theDeck.turnCounter === 0) {
+//     theDeck.turn = player1;
+//   }
+//   if (theDeck.turnCounter % 4 === 0) {
+//     theDeck.turn = player2;
+//   } else {
+//     theDeck.turn = player1;
+//   }
+// }
+
+function showWhoseTurn() {
+  if (theDeck.turn === player1) {
+    player1column.classList.add('gameBoard-section-scoreColumn-active');
+    player2column.classList.remove('gameBoard-section-scoreColumn-active');
+  }
+  if (theDeck.turn === player2) {
+    player2column.classList.add('gameBoard-section-scoreColumn-active');
+    player1column.classList.remove('gameBoard-section-scoreColumn-active');
+  }
+}
+
 function matchCards() {
   if ((theDeck.selectedCards.length % 2) === 0) {
     theDeck.checkSelectedCards();
+    theDeck.determinePlayer();
   }
 }
 
@@ -209,8 +238,19 @@ function openWinnerScreen() {
     theDeck.endTime = Date.now();
     theDeck.totalTime = (theDeck.endTime - theDeck.startTime);
     winnerTime.innerHTML = `It took you ${Math.floor((theDeck.totalTime/1000)/60)} minutes and ${Math.floor((theDeck.totalTime/1000) % 60)} seconds.`;
+    determineWinner();
+    winnerHeader.innerText = `CONGRATULATIONS, ${theDeck.winner} WINS!`
     saveWinnerInfo();
     arrangeAllWinnerInfo();
+  }
+}
+
+function determineWinner() {
+  if (theDeck.player1matchedCards.length > 2) {
+    theDeck.winner = player1Input.value.toUpperCase();
+  }
+  if (theDeck.player2matchedCards.length > 2) {
+    theDeck.winner = player2Input.value.toUpperCase();
   }
 }
 
@@ -220,7 +260,7 @@ function highScoreMenu() {
 
 function saveWinnerInfo() {
   var playerInfo = {
-    name: theDeck.player1Name,
+    name: theDeck.winner,
     time: theDeck.totalTime
   }
   var retrievedPlayerArray = JSON.parse(localStorage.getItem("playerArray")) || [];
