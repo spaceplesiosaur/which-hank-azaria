@@ -41,7 +41,7 @@ function savePlayerArrayOnrefresh(array) {
 }
 
 function instantiateDeck() {
-  theDeck = new Deck([], [], [], Date.now());
+  theDeck = new Deck([], [], []);
   // deckArray.push(deck);
 }
 
@@ -81,6 +81,7 @@ function onPlayGame() {
   // instantiateMatchCards();
   theDeck.shuffle();
   displayCards();
+  theDeck.startTime = Date.now();
 }
 
 function openGameBoard() {
@@ -134,6 +135,7 @@ function displayCards() {
 
 function flipCard(event) {
   console.log(event);
+  // XXX: I think you mean (event.target.class !== 'figure-card-image')
   if (!event.target.class === 'figure-card-image') {
     return
   }
@@ -149,6 +151,7 @@ function flipCard(event) {
   console.log("MATCHED CARDS ARRAY", theDeck.matchedCards);
   setTimeout(flipCardBack, (2 * 1000), cardToFlip, event);
   setTimeout(flippedRules, (2.1 * 1000), cardToFlip, event);
+  // XXX: this maybe doesn't have to be on delay?
   setTimeout(updateMatchCount, (2.2 * 1000));
   openWinnerScreen();
 }
@@ -196,6 +199,7 @@ function flipCardBack(card, eventSpot) {
   } else {
     card.flipped = false;
   }
+  // XXX: These two card.flipped = false lines can be one, down here.
 }
 
 function openWinnerScreen() {
@@ -204,13 +208,14 @@ function openWinnerScreen() {
     gameBoardScreen.classList.add('hidden');
     theDeck.endTime = Date.now();
     theDeck.totalTime = (theDeck.endTime - theDeck.startTime);
-    winnerTime.innerHTML = `It took you ${Math.floor((theDeck.totalTime/1000)/60)} minutes and ${Math.floor((theDeck.totalTime/1000) % 60)} seconds.`
+    winnerTime.innerHTML = `It took you ${Math.floor((theDeck.totalTime/1000)/60)} minutes and ${Math.floor((theDeck.totalTime/1000) % 60)} seconds.`;
+    saveWinnerInfo();
+    arrangeAllWinnerInfo();
   }
 }
 
 function highScoreMenu() {
-  saveWinnerInfo();
-  arrangeAllWinnerInfo();
+  winnerMenuContainer.classList.toggle('hidden');
 }
 
 function saveWinnerInfo() {
@@ -235,7 +240,7 @@ function arrangeAllWinnerInfo() {
   winnerMenuContainer.innerHTML = "";
   for (var i = 0; i < sortedArray.length; i++) {
     var rank = rank + 1;
-    winnerMenuContainer.insertAdjacentHTML('afterbegin', htmlToAddWinnerList(sortedArray[i], rank));
+    winnerMenuContainer.insertAdjacentHTML('beforeend', htmlToAddWinnerList(sortedArray[i], rank));
     if (i === 5) {
       return
     }

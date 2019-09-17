@@ -1,5 +1,5 @@
 * {
-  /* border: 1px solid red; */
+  border: 1px solid red;
   margin: 0;
   /* padding: 0;
   box-sizing: border-box; */
@@ -169,6 +169,7 @@ h2.welcomeHeader {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
   background-color: #F5F7F6;
+  width: 100%;
 }
 
 .gameBoard-section-scoreColumn {
