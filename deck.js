@@ -34,13 +34,14 @@ class Deck {
   moveToMatched(array) {
     for (var i = 0; i < array.length; i++) {
       array[i].match();
-      moveToPlayerMatched(array);
+      this.moveToPlayerMatched(array);
       this.matchedCards.push(array[i]);
       // this.matches = this.matchedCards.length;
     }
     this.matches = this.matchedCards.length;
   }
-  determinePlayer() {
+  determinePlayer(player1, player2) {
+    console.log('Turn counter', this.turnCounter);
     if (this.turnCounter === 0) {
       this.turn = player1;
     }
@@ -51,12 +52,15 @@ class Deck {
     }
   }
   moveToPlayerMatched(array) {
-    if (this.turn = player1) {
-      this.player1matchedCards.push(array[i]);
-      console.log("player 1 matches", this.player1matchedCards);
-    } else {
-      this.player2matchedCards.push(array[i]);
-      console.log("player 2 matches", this.player2matchedCards);
+    for (var i = 0; i < array.length; i++) {
+      if (this.turn = player1Input.value.toUpperCase()) {
+        this.player1matchedCards.push(array[i]);
+        console.log("player 1 matches", this.player1matchedCards);
+      }
+      if (this.turn = player1Input.value.toUpperCase()) {
+        this.player2matchedCards.push(array[i]);
+        console.log("player 2 matches", this.player2matchedCards);
+      }
+      }
     }
   }
-}

@@ -9,6 +9,7 @@ var playGameButton = document.getElementById('playGameButton');
 var gameBoardScreen = document.getElementById('gameBoardScreen');
 var cardTable = document.getElementById('cardTable');
 var matchCounterPlayer1 = document.getElementById('matchCounterPlayer1');
+var matchCounterPlayer2 = document.getElementById('matchCounterPlayer2')
 var buttonParent = document.getElementById('buttonParent');
 var winnerScreen = document.getElementById('winnerScreen');
 var columnNamePlayer1 = document.getElementById('columnNamePlayer1');
@@ -150,6 +151,7 @@ function flipCard(event) {
   var cardToFlip = findCardInfoById(cardHTMLId);
   cardToFlip.flipped = true;
   flippedRules(cardToFlip, event);
+  showWhoseTurn();
   matchCards();
   console.log("SELECTED CARDS", theDeck.selectedCards);
   console.log("MATCHED CARDS ARRAY", theDeck.matchedCards);
@@ -165,7 +167,6 @@ function flippedRules(card, eventSpot) {
     eventSpot.target.src = card.image;
     addToSelected(card);
     theDeck.turnCounter++;
-    console.log(theDeck.turnCounter);
   } else {
     eventSpot.target.src = "./images/hankAzariaBWphoto.jpg"
     removeFromSelected();
@@ -184,11 +185,11 @@ function flippedRules(card, eventSpot) {
 // }
 
 function showWhoseTurn() {
-  if (theDeck.turn === player1) {
+  if (theDeck.turn === player1Input.value.toUpperCase()) {
     player1column.classList.add('gameBoard-section-scoreColumn-active');
     player2column.classList.remove('gameBoard-section-scoreColumn-active');
   }
-  if (theDeck.turn === player2) {
+  if (theDeck.turn === player2Input.value.toUpperCase()) {
     player2column.classList.add('gameBoard-section-scoreColumn-active');
     player1column.classList.remove('gameBoard-section-scoreColumn-active');
   }
@@ -197,12 +198,13 @@ function showWhoseTurn() {
 function matchCards() {
   if ((theDeck.selectedCards.length % 2) === 0) {
     theDeck.checkSelectedCards();
-    theDeck.determinePlayer();
+    theDeck.determinePlayer(player1Input.value.toUpperCase(), player2Input.value.toUpperCase());
   }
 }
 
 function updateMatchCount() {
-  matchCounterPlayer1.innerText = `${theDeck.matches/2}`;
+  matchCounterPlayer1.innerText = `${theDeck.player1matchedCards.length/2}`;
+  matchCounterPlayer2.innerText = `${theDeck.player2matchedCards.length/2}`;
 }
 
 function findCardInfoById(htmlId) {

@@ -50,7 +50,7 @@
       <button class="welcomePage-button-playGame" id="playGameButton">PLAY GAME</button>
     </section>
     <section class="body-section-gameBoard hidden" id="gameBoardScreen">
-      <section class="gameBoard-section-scoreColumn" id="player1column">
+      <section class="gameBoard-section-scoreColumn gameBoard-section-scoreColumn-active" id="player1column">
         <p class="gameBoard-scoreColumn-heavyText" id="columnNamePlayer1">Player 1 Name</p>
         <p class="gameBoard-scoreColumn-lightText">Top Player</p>
         <div class="gameBoard-scoreColumn-line"></div>
@@ -123,12 +123,12 @@
 
 
       </section>
-      <section class="gameBoard-section-scoreColumn" id="player1column">
+      <section class="gameBoard-section-scoreColumn" id="player2column">
         <p class="gameBoard-scoreColumn-heavyText" id="columnNamePlayer2">Player 2 Name</p>
         <p class="gameBoard-scoreColumn-lightText">Top Player</p>
         <div class="gameBoard-scoreColumn-line"></div>
         <p class="gameBoard-scoreColumn-lightText">MATCHES THIS ROUND</p>
-        <p class="gameBoard-scoreColumn-number">5</p>
+        <p class="gameBoard-scoreColumn-number" id="matchCounterPlayer2">5</p>
         <div class="gameBoard-scoreColumn-line"></div>
         <p class="gameBoard-scoreColumn-heavyText">GAME WINS</p>
         <section class="scoreColumn-section-roundsTracker">
