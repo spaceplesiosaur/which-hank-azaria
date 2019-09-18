@@ -270,7 +270,6 @@ function startNewGame() {
   rematch();
   player1Input.value = "";
   player2Input.value = "";
-
 }
 
 function htmlToAddCards(card) {
