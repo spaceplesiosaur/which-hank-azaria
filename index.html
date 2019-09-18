@@ -10,20 +10,18 @@
 
 <body>
   <header>
-    <!-- <button class="header-button-navButton"> -->
-      <img src="./images/nav-button.png" class="header-navButton-image" alt="winner-list-button" id="winnerListButton">
-    <!-- </button> -->
+    <img src="./images/nav-button.png" class="header-navButton-image" alt="winner-list-button" id="winnerListButton">
     <h1>Which Hank Azaria</h1>
   </header>
   <section class="header-menu-winnerMenu hidden" id="winnerMenuContainer">
-    <section class="winnderMenu-section-container">
+    <!-- <section class="winnderMenu-section-container">
       <p class="gameBoard-scoreColumn-heavyText">This could be you!</p>
       <p class="gameBoard-scoreColumn-lightText">#1 Top Player</p>
       <div class="gameBoard-scoreColumn-line"></div>
-    </section>
+    </section> -->
   </section>
   <main>
-    <section class="body-section-displayScreen enterPage" id="enterPageScreen">
+    <section class="body-section-displayScreen enterPage hidden" id="enterPageScreen">
       <section class="enterPage-section-playerInputs">
         <div class="playerInputs-container-buttonAndLabel">
           <input type="text" name="player1" class="enterPage-playerInputs-input" maxlength="32" id="player1Input"></input>
@@ -39,12 +37,12 @@
         <label for="playGame" class="enterPage-button-label hidden" id="enterGameLabel">PLEASE ENTER YOUR NAME</label>
       </section>
     </section>
-    <section class="body-section-displayScreen welcomePage hidden" id="welcomePageScreen">
+    <section class="body-section-displayScreen welcomePage" id="welcomePageScreen">
       <section class="welcomePage-section-welcomeText">
         <h2 class="displayScreen-header welcomeHeader" id="welcomeHeaderText">WELCOME PLAYER 1 NAME AND PLAYER 2 NAME!</h2>
         <p class="displayScreen-text directions">The goal of the game is to find all 5 pairs of cards as quickly as possible. The player tht finds the greatest number of pairs, wins.</p>
         <p class="displayScreen-text directions">To begin playing, the player whose name is highlighted can click any card in the pile. It will flip over and reveal a picture of Beyonce. Click another card. If they match, they will disappear and you
-        will have completed a match! If they don't, you'll have three seconds to look at them before they flip over. Then it's time for the other player to try!</p>
+          will have completed a match! If they don't, you'll have three seconds to look at them before they flip over. Then it's time for the other player to try!</p>
         <p class="displayScreen-text directions">After you play, you'll see the name of the final winner and how long it took to win the game.</p>
       </section>
       <button class="welcomePage-button-playGame" id="playGameButton">PLAY GAME</button>
@@ -57,70 +55,71 @@
         <p class="gameBoard-scoreColumn-lightText">MATCHES THIS ROUND</p>
         <p class="gameBoard-scoreColumn-number" id="matchCounterPlayer1">0</p>
         <div class="gameBoard-scoreColumn-line"></div>
-        <p class="gameBoard-scoreColumn-heavyText">GAME WINS</p>
-        <section class="scoreColumn-section-roundsTracker">
+        <!-- <p class="gameBoard-scoreColumn-heavyText">GAME WINS</p> -->
+        <!-- <section class="scoreColumn-section-roundsTracker">
           <p class="gameBoard-scoreColumn-lightText">Round 1 xyz seconds</p>
           <p class="gameBoard-scoreColumn-lightText">Round 1 xyz seconds</p>
         </section>
         <section class="scoreColumn-section-roundsTracker">
           <p class="gameBoard-scoreColumn-lightText">Round 1 xyz seconds</p>
           <p class="gameBoard-scoreColumn-lightText">Round 1 xyz seconds</p>
-        </section>
+        </section> -->
       </section>
       <section class="gameBoard-section-cardTable" id="cardTable">
+        <div class="cardTable-section-buffer" id="cardTableBuffer"></div>
 
 
-        <!-- <section class="cardTable-section-cardContainer">
-          <figure class="cardContainer-figure-card">
-            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
-          </figure>
-        </section>
-        <section class="cardTable-section-cardContainer">
-          <figure class="cardContainer-figure-card">
-            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
-          </figure>
-        </section>
-        <section class="cardTable-section-cardContainer">
-          <figure class="cardContainer-figure-card">
-            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
-          </figure>
-        </section>
-        <section class="cardTable-section-cardContainer">
-          <figure class="cardContainer-figure-card">
-            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
-          </figure>
-        </section>
-        <section class="cardTable-section-cardContainer">
-          <figure class="cardContainer-figure-card">
-            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
-          </figure>
-        </section>
-        <section class="cardTable-section-cardContainer">
-          <figure class="cardContainer-figure-card">
-            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
-          </figure>
-        </section>
-        <section class="cardTable-section-cardContainer">
-          <figure class="cardContainer-figure-card">
-            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
-          </figure>
-        </section>
-        <section class="cardTable-section-cardContainer">
-          <figure class="cardContainer-figure-card">
-            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
-          </figure>
-        </section>
-        <section class="cardTable-section-cardContainer">
-          <figure class="cardContainer-figure-card">
-            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
-          </figure>
-        </section>
-        <section class="cardTable-section-cardContainer">
-          <figure class="cardContainer-figure-card">
-            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
-          </figure>
-        </section> -->
 
+        <section class="cardTable-section-cardContainer">
+          <figure class="cardContainer-figure-card">
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
+          </figure>
+        </section>
+        <section class="cardTable-section-cardContainer">
+          <figure class="cardContainer-figure-card">
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
+          </figure>
+        </section>
+        <section class="cardTable-section-cardContainer">
+          <figure class="cardContainer-figure-card">
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
+          </figure>
+        </section>
+        <section class="cardTable-section-cardContainer">
+          <figure class="cardContainer-figure-card">
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
+          </figure>
+        </section>
+        <section class="cardTable-section-cardContainer">
+          <figure class="cardContainer-figure-card">
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
+          </figure>
+        </section>
+        <section class="cardTable-section-cardContainer">
+          <figure class="cardContainer-figure-card">
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
+          </figure>
+        </section>
+        <section class="cardTable-section-cardContainer">
+          <figure class="cardContainer-figure-card">
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
+          </figure>
+        </section>
+        <section class="cardTable-section-cardContainer">
+          <figure class="cardContainer-figure-card">
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
+          </figure>
+        </section>
+        <section class="cardTable-section-cardContainer">
+          <figure class="cardContainer-figure-card">
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
+          </figure>
+        </section>
+        <section class="cardTable-section-cardContainer">
+          <figure class="cardContainer-figure-card">
+            <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
+          </figure>
+        </section>
 
       </section>
       <section class="gameBoard-section-scoreColumn" id="player2column">
@@ -128,28 +127,28 @@
         <p class="gameBoard-scoreColumn-lightText">Top Player</p>
         <div class="gameBoard-scoreColumn-line"></div>
         <p class="gameBoard-scoreColumn-lightText">MATCHES THIS ROUND</p>
-        <p class="gameBoard-scoreColumn-number" id="matchCounterPlayer2">5</p>
+        <p class="gameBoard-scoreColumn-number" id="matchCounterPlayer2">0</p>
         <div class="gameBoard-scoreColumn-line"></div>
-        <p class="gameBoard-scoreColumn-heavyText">GAME WINS</p>
-        <section class="scoreColumn-section-roundsTracker">
+        <!-- <p class="gameBoard-scoreColumn-heavyText">GAME WINS</p> -->
+        <!-- <section class="scoreColumn-section-roundsTracker">
           <p class="gameBoard-scoreColumn-lightText">Round 1 xyz seconds</p>
           <p class="gameBoard-scoreColumn-lightText">Round 1 xyz seconds</p>
         </section>
         <section class="scoreColumn-section-roundsTracker">
           <p class="gameBoard-scoreColumn-lightText"></p>
           <p class="gameBoard-scoreColumn-lightText"></p>
-        </section>
+        </section> -->
       </section>
     </section>
-      <section class="body-section-displayScreen winnerPage hidden" id="winnerScreen">
-        <h2 class="displayScreen-header winnerHeader" id="winnerHeader">CONGRATULATIONS, PLAYER 1 NAME WINS!</h2>
-        <p class="displayScreen-text-heavy" id="winnerTime">It took you x seconds.</p>
-        <p class="displayScreen-text prompt">Click below to keep playing</p>
-        <section class="winnerPage-section-buttonSection">
-          <button class="winnerPage-button-newGame" id="newGameButton">NEW GAME</button>
-          <button class="winnerPage-button-newGame">REMATCH</button>
-        </section>
+    <section class="body-section-displayScreen winnerPage hidden" id="winnerScreen">
+      <h2 class="displayScreen-header winnerHeader" id="winnerHeader">CONGRATULATIONS, PLAYER 1 NAME WINS!</h2>
+      <p class="displayScreen-text-heavy" id="winnerTime">It took you x seconds.</p>
+      <p class="displayScreen-text prompt">Click below to keep playing</p>
+      <section class="winnerPage-section-buttonSection">
+        <button class="winnerPage-button-newGame" id="newGameButton">NEW GAME</button>
+        <button class="winnerPage-button-newGame" id="rematchButton">REMATCH</button>
       </section>
+    </section>
   </main>
 </body>
 <script type="text/javascript" src="card.js"></script>
