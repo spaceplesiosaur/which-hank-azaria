@@ -1,8 +1,5 @@
 * {
-  border: 1px solid red;
   margin: 0;
-  /* padding: 0;
-  box-sizing: border-box; */
 }
 
 body {
@@ -13,9 +10,6 @@ body {
 header {
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
-
-  /* align-self: center; */
   height: 10%;
   background: #ffffff;
 }
@@ -25,7 +19,7 @@ section.hidden {
 }
 
 label.hidden {
-    display: none;
+  display: none;
 }
 
 img.hidden {
@@ -34,14 +28,11 @@ img.hidden {
 
 .header-button-navButton {
   width: 8%;
-  /* height: 8%; */
   padding: 0;
 }
 
 .header-navButton-image {
-  /* width: 100%; */
   width: 8%;
-  /* height: 100%; */
   margin: 0;
   float: left;
 }
@@ -51,25 +42,18 @@ h1 {
   weight: 800;
   margin: 2% 30% 0 30%;
   text-align: center;
-  /* margin-right: 35%; */
-
-
 }
 
 .body-section-displayScreen {
-  background: url("./images/hankAzariaBackground.jpg");
-  /* background-image: linear-gradient(#00000010, #00000010); */
+  background: radial-gradient(#DCE0E1, transparent), url("./images/hankAzariaBackground.jpg");
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  /* height: 650px; */
-  /* background-repeat: no-repeat; */
   background-size: cover;
   text-align: center;
   background-position: left;
   position: relative;
-  /* padding: 10%; */
 }
 
 .enterPage-section-playerInputs {
@@ -87,9 +71,9 @@ h1 {
 }
 
 .enterPage-playerInputs-input {
-
   padding: 5%;
 }
+
 .enterPage-playerInputs-label {
   color: #010101;
   text-align: left;
@@ -177,6 +161,11 @@ h2.welcomeHeader {
   margin: 1em;
 }
 
+section.gameBoard-section-scoreColumn-active {
+  background-color: #e1275f;
+  margin: 1em;
+}
+
 .gameBoard-scoreColumn-heavyText {
   color: #ffffff;
   font-weight: 800;
@@ -195,7 +184,7 @@ h2.welcomeHeader {
   color: #ffffff;
   font-weight: 800;
   font-size: 3em;
-  margin: 1em 1em 1em  1em;
+  margin: 1em 1em 1em 1em;
   text-align: center;
 }
 
@@ -217,7 +206,6 @@ h2.welcomeHeader {
 .cardTable-section-cardContainer {
   width: 180px;
   height: 250px;
-
 }
 
 .skewLeft {
@@ -239,7 +227,7 @@ h2.welcomeHeader {
 .cardContainer-figure-card {
   border: 1px solid black;
   margin: 2em;
-  width:  65%;
+  width: 65%;
   height: 70%;
 }
 
@@ -286,4 +274,112 @@ p.prompt {
   width: 10%;
   position: absolute;
   z-index: 1000;
+  overflow: scroll;
+  overflow-wrap: break-word;
+}
+
+.cardTable-section-buffer {
+  width: 7%;
+  height: 5% top: 0;
+}
+
+@media screen and (max-width: 1300px) {
+  body {
+    font-family: 'Open Sans';
+    margin: 0px 100px 0px 100px;
+  }
+
+  header {
+    display: flex;
+    flex-direction: row;
+    height: 70px;
+    background: #ffffff;
+  }
+
+  h1 {
+    font-size: 1.5em;
+    weight: 800;
+    text-align: center;
+  }
+}
+
+@media all and (max-width: 1100px) {
+  body {
+    font-family: 'Open Sans';
+    margin: 0px 70px 0px 70px
+  }
+
+  header {
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+    background: #ffffff;
+  }
+
+  h1 {
+    font-size: 1.5em;
+    weight: 800;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 900px) {
+  body {
+    font-family: 'Open Sans';
+    margin: 0;
+  }
+
+  header {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    background: #ffffff;
+  }
+
+  h1 {
+    font-size: 1.2em;
+    weight: 800;
+    margin: 2% 30% 0 30%;
+    text-align: center;
+  }
+
+  .header-menu-winnerMenu {
+    background-color: #010101;
+    padding: 1em 1em 1em 1em;
+    width: 15%;
+    position: absolute;
+    z-index: 1000;
+    overflow: scroll;
+    overflow-wrap: break-word;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  body {
+    font-family: 'Open Sans';
+    margin: 0;
+  }
+
+  header {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    background: #ffffff;
+  }
+
+  h1 {
+    font-size: 1em;
+    weight: 800;
+    margin: 2% 30% 0 30%;
+    text-align: center;
+  }
+
+  .header-menu-winnerMenu {
+    background-color: #010101;
+    padding: 1em 1em 1em 1em;
+    width: 20%;
+    position: absolute;
+    z-index: 1000;
+    overflow: scroll;
+    overflow-wrap: break-word;
+  }
 }
