@@ -10,11 +10,18 @@
 
 <body>
   <header>
-    <button class="header-button-navButton">
-      <img src="./images/nav-button.png" class="header-navButton-image">
-    </button>
+    <!-- <button class="header-button-navButton"> -->
+      <img src="./images/nav-button.png" class="header-navButton-image" alt="winner-list-button" id="winnerListButton">
+    <!-- </button> -->
     <h1>Which Hank Azaria</h1>
   </header>
+  <section class="header-menu-winnerMenu hidden" id="winnerMenuContainer">
+    <section class="winnderMenu-section-container">
+      <p class="gameBoard-scoreColumn-heavyText">This could be you!</p>
+      <p class="gameBoard-scoreColumn-lightText">#1 Top Player</p>
+      <div class="gameBoard-scoreColumn-line"></div>
+    </section>
+  </section>
   <main>
     <section class="body-section-displayScreen enterPage" id="enterPageScreen">
       <section class="enterPage-section-playerInputs">
@@ -139,7 +146,7 @@
         <p class="displayScreen-text-heavy" id="winnerTime">It took you x seconds.</p>
         <p class="displayScreen-text prompt">Click below to keep playing</p>
         <section class="winnerPage-section-buttonSection">
-          <button class="winnerPage-button-newGame">NEW GAME</button>
+          <button class="winnerPage-button-newGame" id="newGameButton">NEW GAME</button>
           <button class="winnerPage-button-newGame">REMATCH</button>
         </section>
       </section>

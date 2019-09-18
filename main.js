@@ -13,29 +13,42 @@ var winnerScreen = document.getElementById('winnerScreen');
 var columnNamePlayer1 = document.getElementById('columnNamePlayer1');
 var winnerHeader = document.getElementById('winnerHeader');
 var winnerTime = document.getElementById('winnerTime');
-var picturesArray = ['./images/Blue-Raja-Mystery-Men-Hank-Azaria-b.jpg', './images/hank-agador.jpg', './images/hank-comic-book.gif', './images/Hank-cradle.jpg', './images/hank-david.jpg', './images/hank-smufs.jpg']
-// var cardsArray = [];
-var deckArray = [];
+var winnerMenuContainer = document.getElementById('winnerMenuContainer');
+var winnerListButton = document.getElementById('winnerListButton');
+var newGameButton = document.getElementById('newGameButton');
+// var deckArray = [];
+var playerArray = [];
+var theDeck;
 
-// player1Input.addEventListener('keyup', checkNameField);
-// playGameButton.addEventListener('click', enterGameButtonRules);
 enterGameButton.addEventListener('click', onEnterGameButton);
 playGameButton.addEventListener('click', onPlayGame);
-// playGameButton.addEventListener('click', openGameBoard);
-// playGameButton.addEventListener('click', instantiateNewCards);
-// playGameButton.addEventListener('click', instantiateMatchCards);
-// playGameButton.addEventListener('click', instantiateDeck);
 cardTable.addEventListener('click', flipCard);
-// playGameButton.addEventListener('click', displayCards);
+winnerListButton.addEventListener('click', highScoreMenu);
+newGameButton.addEventListener('click', startNewGame);
 
+savePlayerArrayOnrefresh(playerArray);
+instantiateDeck();
+// saveWinnerInfo();
+// arrangeAllWinnerInfo();
 
+function savePlayerArrayOnrefresh(array) {
+  // localStorage.setItem("playerArray", JSON.stringify(array));
+  var retrievedArray = JSON.parse(localStorage.getItem("playerArray")) || [];
+  for (var i = 0; i < retrievedArray.length; i++) {
+    array.push(retrievedArray[i])
+  }
+  localStorage.setItem("playerArray", JSON.stringify(array));
+}
+
+function instantiateDeck() {
+  theDeck = new Deck([], [], []);
+  // deckArray.push(deck);
+}
 
 function onEnterGameButton() {
   console.log("onEnter ran");
   checkNameField();
-  // enterGameButtonRules();
   fillPlayerName();
-  // openWelcomeScreen();
 }
 
 function fillPlayerName() {
@@ -43,49 +56,32 @@ function fillPlayerName() {
   welcomeHeaderText.innerText = `WELCOME ${player1Input.value.toUpperCase()} AND PLAYER 2 NAME!`;
   columnNamePlayer1.innerText = `${player1Input.value.toUpperCase()}`;
   winnerHeader.innerText = `CONGRATULATIONS, ${player1Input.value.toUpperCase()} WINS!`
-
+  theDeck.player1Name = player1Input.value.toUpperCase();
 }
 
 function checkNameField() {
   console.log("checkNameField ran");
   if (player1Input.value !== "") {
-    // enterGameButton.disabled = false;
     openWelcomeScreen();
   } else {
-    // enterGameButton.disabled = true;
     enterGameLabel.classList.remove('hidden');
-    // enterGameButton.innerText = "Please enter a name";
-    // enterGameButton.classList.add('.enterPage-button-playGameButton-error')
   }
 }
-
-// function enterGameButtonRules() {
-//   if (enterGameButton.disabled === true) {
-//     enterGameLabel.classList.remove('hidden');
-//   }
-// }
 
 function openWelcomeScreen() {
   welcomePageScreen.classList.remove('hidden');
   enterPageScreen.classList.add('hidden');
-
 }
 
-// function onPlayGame() {
-//   openGameBoard();
-//   instantiateNewCards()
-//   displayCards(instantiateNewCards());
-// }
 function onPlayGame() {
   openGameBoard();
-  instantiateDeck();
-  instantiateNewCards();
-  instantiateMatchCards();
-  // shuffleDeck(cardsArray);
-  // shuffleDeck(deckArray[0].cards);
-  deckArray[0].shuffle();
-  displayCards();
   // instantiateDeck();
+  instantiateNewCards();
+  instantiateNewCards();
+  // instantiateMatchCards();
+  theDeck.shuffle();
+  displayCards();
+  theDeck.startTime = Date.now();
 }
 
 function openGameBoard() {
@@ -95,52 +91,23 @@ function openGameBoard() {
 
 function instantiateNewCards() {
   var matchInfo = 0;
+  var picturesArray = ['./images/Blue-Raja-Mystery-Men-Hank-Azaria-b.jpg', './images/hank-agador.jpg', './images/hank-comic-book.gif', './images/Hank-cradle.jpg', './images/hank-david.jpg', './images/hank-smufs.jpg'];
   for (var cardNumber = 0; cardNumber < 5; cardNumber++) {
     matchInfo = matchInfo + 1;
-    var card = new Card(matchInfo, picturesArray[matchInfo-1], shuffleSkews());
-    deckArray[0].cards.push(card);
-  }
-}
-
-// function instantiateNewCards() {
-//   var matchInfo = 0;
-//   for (var cardNumber = 0; cardNumber < 5; cardNumber++) {
-//     matchInfo = matchInfo + 1;
-//     var card = new Card(matchInfo, picturesArray[matchInfo-1], shuffleSkews());
-//     cardsArray.push(card);
-//   }
-// }
-
-function instantiateMatchCards() {
-  var matchInfo = 0;
-  for (var cardNumber = 0; cardNumber < 5; cardNumber++) {
-    matchInfo = matchInfo + 1;
-    var card = new Card(matchInfo, picturesArray[matchInfo-1], shuffleSkews());
-    deckArray[0].cards.push(card);
-    // displayCards(card);
+    var card = new Card(matchInfo, picturesArray[matchInfo - 1], shuffleSkews());
+    theDeck.cards.push(card);
   }
 }
 
 // function instantiateMatchCards() {
 //   var matchInfo = 0;
+//   var picturesArray = ['./images/Blue-Raja-Mystery-Men-Hank-Azaria-b.jpg', './images/hank-agador.jpg', './images/hank-comic-book.gif', './images/Hank-cradle.jpg', './images/hank-david.jpg', './images/hank-smufs.jpg'];
 //   for (var cardNumber = 0; cardNumber < 5; cardNumber++) {
 //     matchInfo = matchInfo + 1;
-//     var card = new Card(matchInfo, picturesArray[matchInfo-1], shuffleSkews());
-//     cardsArray.push(card);
-//     // displayCards(card);
+//     var card = new Card(matchInfo, picturesArray[matchInfo - 1], shuffleSkews());
+//     deckArray[0].cards.push(card);
 //   }
 // }
-
-// function shuffleDeck(array) {
-//   for (var i = array.length -1; i >= 0; i--) {
-//     var randomIndex = Math.floor(Math.random() * (i + 1));
-//     var chosenArrayItem = array[i];
-//     var randomArrayItem = array[randomIndex];
-//     array[i] = randomArrayItem;
-//     array[randomIndex] = chosenArrayItem;
-//   }
-// }
-//Fisher-Yates Shuffle
 
 function shuffleSkews() {
   var randomSkew = Math.floor(Math.random() * 4);
@@ -159,36 +126,20 @@ function shuffleSkews() {
   }
 }
 
-function instantiateDeck() {
-  var deck = new Deck([], [], [], Date.now());
-  deckArray.push(deck);
-}
-
-// function instantiateDeck() {
-//   var deck = new Deck(cardsArray, [], []);
-//   deckArray.push(deck);
-// }
-
 function displayCards() {
-  for (var i = 0; i < deckArray[0].cards.length; i++) {
-    cardTable.insertAdjacentHTML('beforeend', htmlToAddCards(deckArray[0].cards[i]));
+  for (var i = 0; i < theDeck.cards.length; i++) {
+    cardTable.insertAdjacentHTML('beforeend', htmlToAddCards(theDeck.cards[i]));
   }
-
+  console.log(theDeck.cards);
 }
-
-// function displayCards() {
-//   for (var i = 0; i < cardsArray.length; i++) {
-//     cardTable.insertAdjacentHTML('beforeend', htmlToAddCards(cardsArray[i]));
-//   }
-//
-// }
 
 function flipCard(event) {
   console.log(event);
+  // XXX: I think you mean (event.target.class !== 'figure-card-image')
   if (!event.target.class === 'figure-card-image') {
     return
   }
-  if (deckArray[0].selectedCards.length === 2) {
+  if (theDeck.selectedCards.length === 2) {
     return;
   }
   var cardHTMLId = parseInt(event.target.parentNode.parentNode.id);
@@ -196,13 +147,13 @@ function flipCard(event) {
   cardToFlip.flipped = true;
   flippedRules(cardToFlip, event);
   matchCards();
-  console.log("SELECTED CARDS", deckArray[0].selectedCards);
-  console.log("MATCHED CARDS ARRAY", deckArray[0].matchedCards);
+  console.log("SELECTED CARDS", theDeck.selectedCards);
+  console.log("MATCHED CARDS ARRAY", theDeck.matchedCards);
   setTimeout(flipCardBack, (2 * 1000), cardToFlip, event);
   setTimeout(flippedRules, (2.1 * 1000), cardToFlip, event);
+  // XXX: this maybe doesn't have to be on delay?
   setTimeout(updateMatchCount, (2.2 * 1000));
   openWinnerScreen();
-  // event.target.src = cardToFlip.image;
 }
 
 function flippedRules(card, eventSpot) {
@@ -212,49 +163,34 @@ function flippedRules(card, eventSpot) {
   } else {
     eventSpot.target.src = "./images/hankAzariaBWphoto.jpg"
     removeFromSelected();
-    //need to be more sophisticated than a pop?
   }
 }
 
 function matchCards() {
-  if ((deckArray[0].selectedCards.length % 2) === 0) {
-    deckArray[0].checkSelectedCards();
+  if ((theDeck.selectedCards.length % 2) === 0) {
+    theDeck.checkSelectedCards();
   }
 }
 
 function updateMatchCount() {
-  matchCounterPlayer1.innerText = `${deckArray[0].matches/2}`;
+  matchCounterPlayer1.innerText = `${theDeck.matches/2}`;
 }
 
 function findCardInfoById(htmlId) {
-  for (var i = 0; i < deckArray[0].cards.length; i++) {
-    if (deckArray[0].cards[i].matchInfo === htmlId) {
-      return deckArray[0].cards[i];
+  for (var i = 0; i < theDeck.cards.length; i++) {
+    if (theDeck.cards[i].matchInfo === htmlId) {
+      return theDeck.cards[i];
     }
   }
 }
 
-// function findCardInfoById(htmlId) {
-//   for (var i = 0; i < cardsArray.length; i++) {
-//     if (cardsArray[i].matchInfo === htmlId) {
-//       return cardsArray[i];
-//     }
-//   }
-// }
-
 function addToSelected(card) {
-  deckArray[0].selectedCards.push(card);
+  theDeck.selectedCards.push(card);
 }
 
 function removeFromSelected() {
-  deckArray[0].selectedCards.pop();
+  theDeck.selectedCards.pop();
 }
-
-// function limitTwoCards() {
-//   if (deckArray[0].selectedCards.length === 2) {
-//     return;
-//   }
-// }
 
 function flipCardBack(card, eventSpot) {
   if (card.matched === true) {
@@ -263,37 +199,82 @@ function flipCardBack(card, eventSpot) {
   } else {
     card.flipped = false;
   }
+  // XXX: These two card.flipped = false lines can be one, down here.
 }
 
 function openWinnerScreen() {
-  if (deckArray[0].matches/2 === 5) {
+  if (theDeck.matches / 2 === 5) {
     winnerScreen.classList.remove('hidden');
     gameBoardScreen.classList.add('hidden');
-    deckArray[0].endTime = Date.now();
-    deckArray[0].totalTime = (deckArray[0].endTime - deckArray[0].startTime);
-    winnerTime.innerHTML = `It took you ${Math.floor((deckArray[0].totalTime/1000)/60)} minutes and ${Math.floor((deckArray[0].totalTime/1000) % 60)} seconds.`
+    theDeck.endTime = Date.now();
+    theDeck.totalTime = (theDeck.endTime - theDeck.startTime);
+    winnerTime.innerHTML = `It took you ${Math.floor((theDeck.totalTime/1000)/60)} minutes and ${Math.floor((theDeck.totalTime/1000) % 60)} seconds.`;
+    saveWinnerInfo();
+    arrangeAllWinnerInfo();
   }
 }
+
+function highScoreMenu() {
+  winnerMenuContainer.classList.toggle('hidden');
+}
+
+function saveWinnerInfo() {
+  var playerInfo = {
+    name: theDeck.player1Name,
+    time: theDeck.totalTime
+  }
+  var retrievedPlayerArray = JSON.parse(localStorage.getItem("playerArray")) || [];
+  console.log('retrieved player array', retrievedPlayerArray);
+  retrievedPlayerArray.push(playerInfo);
+  console.log('new retrieved player array', retrievedPlayerArray);
+  localStorage.setItem("playerArray", JSON.stringify(retrievedPlayerArray));
+}
+
+function arrangeAllWinnerInfo() {
+  var retrievedPlayerArray = JSON.parse(localStorage.getItem("playerArray"));
+  var sortedArray = retrievedPlayerArray.sort(function(a, b) {
+    return a.time - b.time
+  });
+  console.log('sorted array', sortedArray);
+  var rank = 0
+  winnerMenuContainer.innerHTML = "";
+  for (var i = 0; i < sortedArray.length; i++) {
+    var rank = rank + 1;
+    winnerMenuContainer.insertAdjacentHTML('beforeend', htmlToAddWinnerList(sortedArray[i], rank));
+    if (i === 5) {
+      return
+    }
+  }
+}
+
+function startNewGame() {
+  enterPageScreen.classList.remove('hidden');
+  winnerScreen.classList.add('hidden');
+  // deckArray = [];
+  instantiateDeck();
+  cardTable.innerHTML = "";
+}
+
 
 function htmlToAddCards(card) {
   return `<section class="cardTable-section-cardContainer ${card.skewClass}" id="${card.matchInfo}">
     <figure class="cardContainer-figure-card">
-      <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
+      <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image" alt="back-of-card"></img>
     </figure>
   </section>`
 }
 
-// <section class="cardTable-section-cardContainer">
-//   <figure class="cardContainer-figure-card">
-//     <img src="./images/hankAzariaBWphoto.jpg" class="figure-card-image"></img>
-//   </figure>
-// </section>
-//instantiate new cards twice.  use a for loop that runs 5 times.
-//each card gets a matchedInfo number. 0++.
-//each card gets an image.  The images will be in a global array. They will assigned when arguments are put in as pictureArray[matchedInfoNumber -1]
+function htmlToAddWinnerList(info, ranking) {
+  return `<section class="winnderMenu-section-container">
+    <p class="gameBoard-scoreColumn-heavyText">${info.name}</p>
+    <p class="gameBoard-scoreColumn-lightText">#${ranking} Top Player</p>
+    <div class="gameBoard-scoreColumn-line"></div>`
+}
 
-//match method - takes argument, and if it's matched info fits the clicked on's matched info, they both get pushed into a matched array.  and are hidden
-
-//matches this round is just the array length / 2
-
-//if matched array, which is on the deck, = 10, send out congrats message
+function htmlWinnerListDefault() {
+  return `<section class="winnderMenu-section-container">
+    <p class="gameBoard-scoreColumn-heavyText">This could be you!</p>
+    <p class="gameBoard-scoreColumn-lightText">#1 Top Player</p>
+    <div class="gameBoard-scoreColumn-line"></div>
+  </section>`
+}

@@ -1,5 +1,5 @@
 * {
-  /* border: 1px solid red; */
+  border: 1px solid red;
   margin: 0;
   /* padding: 0;
   box-sizing: border-box; */
@@ -39,15 +39,18 @@ img.hidden {
 }
 
 .header-navButton-image {
-  width: 100%;
-  height: 100%;
+  /* width: 100%; */
+  width: 8%;
+  /* height: 100%; */
   margin: 0;
+  float: left;
 }
 
 h1 {
   font-size: 2em;
   weight: 800;
   margin: 2% 30% 0 30%;
+  text-align: center;
   /* margin-right: 35%; */
 
 
@@ -65,6 +68,7 @@ h1 {
   background-size: cover;
   text-align: center;
   background-position: left;
+  position: relative;
   /* padding: 10%; */
 }
 
@@ -165,6 +169,7 @@ h2.welcomeHeader {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
   background-color: #F5F7F6;
+  width: 100%;
 }
 
 .gameBoard-section-scoreColumn {
@@ -273,4 +278,12 @@ p.prompt {
   text-align: center;
   margin: 10% 0 10% 0;
   padding: 1%;
+}
+
+.header-menu-winnerMenu {
+  background-color: #010101;
+  padding: 1em 1em 1em 1em;
+  width: 10%;
+  position: absolute;
+  z-index: 1000;
 }

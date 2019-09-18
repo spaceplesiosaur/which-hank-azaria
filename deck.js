@@ -1,12 +1,13 @@
 class Deck {
-  constructor(cards, matchedCards, selectedCards, startTime) {
+  constructor(cards, matchedCards, selectedCards) {
     this.cards = cards;
     this.matchedCards = matchedCards;
     this.selectedCards = selectedCards;
     this.matches = 0;
-    this.startTime = startTime;
+    this.startTime = 0;
     this.endTime = 0;
     this.totalTime = 0;
+    this.player1Name = "";
   }
   shuffle() {
       for (var i = this.cards.length -1; i >= 0; i--) {
