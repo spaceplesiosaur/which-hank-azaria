@@ -7,7 +7,6 @@ class Deck {
     this.startTime = 0;
     this.endTime = 0;
     this.totalTime = 0;
-    // this.player1Name = "";
     this.turn = "";
     this.player1matchedCards = player1matchedCards;
     this.player2matchedCards = player2matchedCards;
@@ -15,12 +14,12 @@ class Deck {
     this.turnCounter = 0;
   }
   shuffle() {
-      for (var i = this.cards.length -1; i >= 0; i--) {
-        var randomIndex = Math.floor(Math.random() * (i + 1));
-        var chosenArrayItem = this.cards[i];
-        var randomArrayItem = this.cards[randomIndex];
-        this.cards[i] = randomArrayItem;
-        this.cards[randomIndex] = chosenArrayItem;
+    for (var i = this.cards.length - 1; i >= 0; i--) {
+      var randomIndex = Math.floor(Math.random() * (i + 1));
+      var chosenArrayItem = this.cards[i];
+      var randomArrayItem = this.cards[randomIndex];
+      this.cards[i] = randomArrayItem;
+      this.cards[randomIndex] = chosenArrayItem;
     }
   }
   checkSelectedCards() {
@@ -36,15 +35,10 @@ class Deck {
       array[i].match();
       this.moveToPlayerMatched(array[i]);
       this.matchedCards.push(array[i]);
-      // this.matches = this.matchedCards.length;
     }
     this.matches = this.matchedCards.length;
   }
   determinePlayer(player1, player2) {
-    console.log('Turn counter', this.turnCounter);
-    // if (this.turnCounter === 0) {
-    //   this.turn = player1;
-    // }
     if (this.turnCounter % 4 === 0) {
       this.turn = player1;
     } else {
@@ -52,13 +46,11 @@ class Deck {
     }
   }
   moveToPlayerMatched(arrayItem) {
-      if (this.turn === player1Input.value.toUpperCase()) {
-        this.player1matchedCards.push(arrayItem);
-        console.log("player 1 matches", this.player1matchedCards);
-      }
-      if (this.turn === player2Input.value.toUpperCase()) {
-        this.player2matchedCards.push(arrayItem);
-        console.log("player 2 matches", this.player2matchedCards);
-      }
+    if (this.turn === player1Input.value.toUpperCase()) {
+      this.player1matchedCards.push(arrayItem);
+    }
+    if (this.turn === player2Input.value.toUpperCase()) {
+      this.player2matchedCards.push(arrayItem);
     }
   }
+}
