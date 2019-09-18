@@ -51,20 +51,17 @@ function instantiateDeck() {
 }
 
 function onEnterGameButton() {
-  console.log("onEnter ran");
   checkNameField();
   fillPlayerName();
 }
 
 function fillPlayerName() {
-  console.log(player1Input.value);
   welcomeHeaderText.innerText = `WELCOME ${player1Input.value.toUpperCase()} AND ${player2Input.value.toUpperCase()}!`;
   columnNamePlayer1.innerText = `${player1Input.value.toUpperCase()}`;
   columnNamePlayer2.innerText = `${player2Input.value.toUpperCase()}`;
 }
 
 function checkNameField() {
-  console.log("checkNameField ran");
   if (player1Input.value !== "" && player2Input.value !== "") {
     openWelcomeScreen();
   } else {
@@ -104,7 +101,6 @@ function instantiateNewCards() {
 
 function shuffleSkews() {
   var randomSkew = Math.floor(Math.random() * 4);
-  console.log(randomSkew);
   if (randomSkew === 0) {
     return 'skewLeft';
   }
@@ -138,27 +134,11 @@ function flipCard(event) {
   cardToFlip.flipped = true;
   flippedRules(cardToFlip, event);
   matchCards();
-  console.log("SELECTED CARDS", theDeck.selectedCards);
-  console.log("MATCHED CARDS ARRAY", theDeck.matchedCards);
   setTimeout(flipCardBack, (2 * 1000), cardToFlip, event);
   setTimeout(flippedRules, (2.1 * 1000), cardToFlip, event);
-  // XXX: this maybe doesn't have to be on delay?
   setTimeout(updateMatchCount, (2.2 * 1000));
   openWinnerScreen();
 }
-
-// function flippedRules() {
-//   for (var i = 0; i < theDeck.cards.length; i++) {
-//     if (theDeck.cards[i].flipped === true) {
-//       eventSpot.target.src = card.image;
-//       addToSelected(card);
-//       theDeck.turnCounter++;
-//     } else {
-//       eventSpot.target.src = "./images/hankAzariaBWphoto.jpg"
-//       removeFromSelected();
-//     }
-//   }
-// }
 
 function flippedRules(card, eventSpot) {
   if (card.flipped === true) {
@@ -210,21 +190,6 @@ function removeFromSelected() {
   theDeck.selectedCards.pop();
 }
 
-// function flipCardBack(card, eventSpot) {
-//   for (var i = 0; i < theDeck.cards.length; i++) {
-//     if (theDeck.card[i].matched === true) {
-//       .classList.add('hidden');
-//   }
-//   if (card.matched === true) {
-//     eventSpot.target.classList.add('hidden');
-//     // card.flipped = false;
-//   } else {
-//     // card.flipped = false;
-//   }
-//   card.flipped = false;
-//   showWhoseTurn();// XXX: These two card.flipped = false lines can be one, down here.
-// }
-
 function flipCardBack(card, eventSpot) {
   if (card.matched === true) {
     eventSpot.target.classList.add('hidden');
@@ -271,9 +236,7 @@ function saveWinnerInfo() {
     time: theDeck.totalTime
   }
   var retrievedPlayerArray = JSON.parse(localStorage.getItem("playerArray")) || [];
-  console.log('retrieved player array', retrievedPlayerArray);
   retrievedPlayerArray.push(playerInfo);
-  console.log('new retrieved player array', retrievedPlayerArray);
   localStorage.setItem("playerArray", JSON.stringify(retrievedPlayerArray));
 }
 
@@ -282,7 +245,6 @@ function arrangeAllWinnerInfo() {
   var sortedArray = retrievedPlayerArray.sort(function(a, b) {
     return a.time - b.time
   });
-  console.log('sorted array', sortedArray);
   var rank = 0
   winnerMenuContainer.innerHTML = "";
   for (var i = 0; i < sortedArray.length; i++) {

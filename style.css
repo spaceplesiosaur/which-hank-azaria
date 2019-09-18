@@ -39,7 +39,7 @@ img.hidden {
 
 h1 {
   font-size: 2em;
-  weight: 800;
+  font-weight: 800;
   margin: 2% 30% 0 30%;
   text-align: center;
 }
@@ -125,7 +125,7 @@ h1 {
 .displayScreen-header {
   color: #010101;
   font-size: 2em;
-  weight: 800;
+  font-weight: 800;
   margin: 10% 0 7% 0;
   width: 60%;
 }
@@ -134,7 +134,7 @@ h1 {
 .displayScreen-text {
   color: #010101;
   font-size: 1em;
-  weight: 400;
+  font-weight: 400;
   width: 60%;
   text-align: left;
 }
@@ -280,7 +280,8 @@ p.prompt {
 
 .cardTable-section-buffer {
   width: 7%;
-  height: 5% top: 0;
+  height: 5%;
+  top: 0;
 }
 
 @media screen and (max-width: 1300px) {
@@ -298,7 +299,7 @@ p.prompt {
 
   h1 {
     font-size: 1.5em;
-    weight: 800;
+    font-weight: 800;
     text-align: center;
   }
 }
@@ -318,7 +319,7 @@ p.prompt {
 
   h1 {
     font-size: 1.5em;
-    weight: 800;
+    font-weight: 800;
     text-align: center;
   }
 }
@@ -337,7 +338,7 @@ p.prompt {
 
   h1 {
     font-size: 1.2em;
-    weight: 800;
+    font-weight: 800;
     margin: 2% 30% 0 30%;
     text-align: center;
   }
@@ -368,7 +369,7 @@ p.prompt {
 
   h1 {
     font-size: 1em;
-    weight: 800;
+    font-weight: 800;
     margin: 2% 30% 0 30%;
     text-align: center;
   }
